@@ -1,6 +1,6 @@
 pragma solidity ^0.8.17;
 
-import "../contract/Starter.sol";
+import "../contracts/Starter.sol";
 import "../circuits/target/contract.sol";
 import "forge-std/console.sol";
 
@@ -8,7 +8,7 @@ import "forge-std/Test.sol";
 import {NoirHelper} from "foundry-noir-helper/NoirHelper.sol";
 
 
-contract StarterOnSonicTestnet is Test {
+contract StarterOnSonicTestnetTest is Test {
     Starter public starter;
     UltraVerifier public verifier;
     NoirHelper public noirHelper;
