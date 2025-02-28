@@ -8,7 +8,7 @@ import "forge-std/Test.sol";
 import {NoirHelper} from "foundry-noir-helper/NoirHelper.sol";
 
 
-contract StarterOnSonicTestnet is Test {
+contract StarterOnSonicTestnetTest is Test {
     Starter public starter;
     UltraVerifier public verifier;
     NoirHelper public noirHelper;
