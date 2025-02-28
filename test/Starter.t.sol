@@ -1,6 +1,6 @@
 pragma solidity ^0.8.17;
 
-import "../contract/Starter.sol";
+import "../contracts/Starter.sol";
 import "../circuits/target/contract.sol";
 import "forge-std/console.sol";
 

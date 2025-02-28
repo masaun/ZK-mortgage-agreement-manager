@@ -2,7 +2,7 @@ pragma solidity ^0.8.17;
 
 import "forge-std/Script.sol";
 import "../circuits/target/contract.sol";
-import "../contract/Starter.sol";
+import "../contracts/Starter.sol";
 
 contract StarterScript is Script {
     Starter public starter;
