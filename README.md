@@ -61,28 +61,60 @@ sh ./buildContract.sh
 
 <br>
 
-## Smart Contract - Script
+## Smart Contract - Script on Sonic Testnet / Electroneum Testnet
 
-- Run the script of the `Starter.s.sol`, which is the test file of the `Starter.sol`.
+- Run the script of the `Starter.s.sol`, which is the test file of the `Starter.sol` on Sonic Testnet.
 ```shell
 sh ./script/starter-script.sh
 ```
 
 <br>
 
-- Run the script of the `Verify.s.sol`, which is the test file of the `UltraVerifier.sol`.
+- Run the script of the `Starter.s.sol`, which is the test file of the `Starter.sol` on Electroneum Testnet.
+```shell
+sh ./script/electroneum-testnet/starter-script.sh
+```
+
+<br>
+
+- Run the script of the `Verify.s.sol`, which is the test file of the `UltraVerifier.sol` on Sonic Testnet.
 ```shell
 sh ./script/verify-script.sh
 ```
 
 <br>
 
-## Smart Contract - Test
+- Run the script of the `Verify.s.sol`, which is the test file of the `UltraVerifier.sol` on Electroneum Testnet.
+```shell
+sh ./script/electroneum-testnet/verify-script.sh
+```
 
-- Run the test of the `Starter.t.sol`, which is the test file of the `Starter.sol`.
+<br>
+
+## Smart Contract - Test on Local Network / Sonic Testnet / Electroneum Testnet
+
+- Run the test of the `Starter.t.sol`, which is the test file of the `Starter.sol` on Local Network.
 ```shell
 sh ./test/runningTest_1.sh
 ```
+
+<br>
+
+- Run the test of the `StarterOnSonicTestnet.t.sol`, which is the test file of the `Starter.sol` on Sonic Testnet.
+```shell
+sh ./test/runningTest_Sonic-Testnet.sh
+```
+
+<br>
+
+- Run the test of the `StarterOnElectroneumTestnet.t.sol`, which is the test file of the `Starter.sol` on Electroneum Testnet.
+```bash
+sh ./test/electroneum-testnet/runningTest_Electroneum-Testnet.sh
+```
+
+
+<br>
+
 
 
 <br>
@@ -92,14 +124,14 @@ sh ./test/runningTest_1.sh
 - NOTE: Each Smart Contract has been deployed on `Sonic Testnet`. See the `"Deployed-smart contracts onSonic Testnet"` paragraph above in this README.
 
 - 1/ Create the `.env` file by coping the example file (`.env.example`) in the root directory.
-  - Then, you should add a private key of your deployer address to the `EDU_CHAIN_PRIVATE_KEY`.
+  - Then, you should add a private key of your deployer address to the `SONIC_BLAZE_TESTNET_PRIVATE_KEY` /or the `ELECTRONEUM_TESTNET_PRIVATE_KEY`.
 ```shell
 cp .env.example .env
 ```
 
-- 2/ Deploy all contracts on EDU Chain (testnet) by running the `script/DeploymentAllContracts.s.sol` 
+- 2/ Deploy all contracts on Sonic Testnet by running the `script/DeploymentAllContracts.s.sol` 
 ```bash
-sh deployment.sh
+sh ./script/deployment.sh
 ``
 Or, directly executing the following command:
 ```bash
@@ -108,6 +140,21 @@ Or, directly executing the following command:
 forge script script/DeploymentAllContracts.s.sol --broadcast --private-key <SONIC_BLAZE_TESTNET_PRIVATE_KEY> \
     ./circuits/target/contract.sol:UltraVerifier \
     ./Starter.sol:Starter --skip-simulation
+```
+
+<br>
+
+- 2/ Deploy all contracts on Electroneum Testnet by running the `script/DeploymentAllContracts.s.sol` 
+```bash
+sh ./script/electroneum-testnet/deployment/deployment-on-electroneum-testnet.sh
+``
+Or, directly executing the following command:
+```bash
+/// [NOTE]: Execute the following at the root directory.
+
+forge script script/electroneum-testnet/deployment/DeploymentAllContracts.s.sol --broadcast --private-key ${ELECTRONEUM_TESTNET_PRIVATE_KEY} \
+    ./circuits/target/contract.sol:UltraVerifier \
+    ./Starter.sol:Starter --skip-simulation --legacy
 ```
 
 <br>
