@@ -1,8 +1,8 @@
 pragma solidity ^0.8.17;
 
 import "forge-std/Script.sol";
-import "../circuits/target/contract.sol";
-import "../contracts/Starter.sol";
+import "../../circuits/target/contract.sol";
+import "../../contracts/Starter.sol";
 
 import { console2 } from "forge-std/console2.sol";
 

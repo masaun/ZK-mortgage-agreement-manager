@@ -65,7 +65,7 @@ sh ./buildContract.sh
 
 - Run the script of the `Starter.s.sol`, which is the test file of the `Starter.sol` on Sonic Testnet.
 ```shell
-sh ./script/starter-script.sh
+sh ./script/sonic-testnet/starter-script.sh
 ```
 
 <br>
@@ -79,7 +79,7 @@ sh ./script/electroneum-testnet/starter-script.sh
 
 - Run the script of the `Verify.s.sol`, which is the test file of the `UltraVerifier.sol` on Sonic Testnet.
 ```shell
-sh ./script/verify-script.sh
+sh ./script/sonic-testnet/verify-script.sh
 ```
 
 <br>
@@ -102,7 +102,7 @@ sh ./test/runningTest_1.sh
 
 - Run the test of the `StarterOnSonicTestnet.t.sol`, which is the test file of the `Starter.sol` on Sonic Testnet.
 ```shell
-sh ./test/runningTest_Sonic-Testnet.sh
+sh ./test/sonic-testnet/runningTest_Sonic-Testnet.sh
 ```
 
 <br>
@@ -131,7 +131,7 @@ cp .env.example .env
 
 - 2/ Deploy all contracts on Sonic Testnet by running the `script/DeploymentAllContracts.s.sol` 
 ```bash
-sh ./script/deployment.sh
+sh ./script/sonic-testnet/deployment/deployment-on-sonic-testnet.sh
 ``
 Or, directly executing the following command:
 ```bash
