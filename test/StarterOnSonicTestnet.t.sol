@@ -15,9 +15,12 @@ contract StarterOnSonicTestnetTest is Test {
 
     function setUp() public {
         noirHelper = new NoirHelper();
-        verifier = UltraVerifier(0x68fC0B89aa8591ff49065971ADFECeE42eF4cA36);
+        
+        address ULTRA_VERIFIER = vm.envAddress("ULTRAVERIFER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
+        address STARTER = vm.envAddress("STARTER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
+        verifier = UltraVerifier(ULTRA_VERIFIER);
         //verifier = new UltraVerifier();
-        starter = Starter(0xE4531177030A7bD88eb58c6ADEe0e4155AfCaeCf);
+        starter = Starter(STARTER);
         //starter = new Starter(verifier);
     }
 
