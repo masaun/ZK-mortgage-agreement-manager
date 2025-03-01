@@ -13,6 +13,7 @@ forge-std = "lib/foundry-noir-helper/lib/forge-std/src/"
 [rpc_endpoints]
 #sepolia = "${SEPOLIA_RPC}"
 sonic_blaze_testnet = "${SONIC_BLAZE_TESTNET_RPC}"
+electroneum_testnet = "${ELECTRONEUM_TESTNET_RPC}"
 
 [etherscan]
 #sepolia = { key = "${SEPOLIA_PRIVATE_KEY}" }
