@@ -1,4 +1,5 @@
 use dep::std;
+mod tests; // tests/mod.nr
 
 fn main(
     root: pub Field, // @dev - Merkle Root
