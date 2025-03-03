@@ -14,7 +14,7 @@ fn main(
     employee_phone_number: str,
     title: str,
     contract_type: str,  // @dev - "Full Time" or "Part Time"
-    annual_salary: u64, // @dev - Annual salary of the employee (in USD)
+    annual_salary: pub u64, // @dev - Annual salary of the employee (in USD)
     employment_start_date: u64,
     employment_end_date: u64,
     letter_created_date: u64
@@ -25,9 +25,6 @@ fn main(
     // Constraint: root == check_root
     let check_root = std::merkle::compute_merkle_root(note_commitment, index, hash_path);
     assert(root == check_root);
-
-    // Constraint: credit_score >= 700
-    //assert(credit_score >= 700, "Credit score of customer should be greater than 700");
 
     // Constraint: income >= 50000 (in USD / year)
     //assert(income >= 50000, "Annual Income of customer should be greater than 50000 USD / year");
