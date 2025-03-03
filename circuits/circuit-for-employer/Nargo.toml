@@ -1,5 +1,5 @@
 [package]
-name="with_foundry"
+name="employment_verification_letter"
 type="bin"
 authors = ["critesjosh"]
 compiler_version = ">=0.31.0"
