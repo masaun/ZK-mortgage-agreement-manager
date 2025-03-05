@@ -8,19 +8,19 @@ echo "Generate witness..."
 nargo execute
 
 echo "Proving and generating a ZK Proof..."
-bb prove -b ./target/with_foundry.json -w ./target/with_foundry.gz -o ./target/with_foundry_proof.bin
+bb prove -b ./target/fico_credit_score.json -w ./target/fico_credit_score.gz -o ./target/fico_credit_score_proof.bin
 
 echo "Generating vkey..."
-bb write_vk -b ./target/with_foundry.json -o ./target/with_foundry_vk.bin
+bb write_vk -b ./target/fico_credit_score.json -o ./target/fico_credit_score_vk.bin
 
 echo "Link vkey to the zkProof"
-bb verify -k ./target/with_foundry_vk.bin -p ./target/with_foundry_proof.bin
+bb verify -k ./target/fico_credit_score_vk.bin -p ./target/fico_credit_score_proof.bin
 
 echo "Check a zkProof"
-head -c 32 ./target/with_foundry_proof.bin | od -An -v -t x1 | tr -d $' \n'
+head -c 32 ./target/fico_credit_score_proof.bin | od -An -v -t x1 | tr -d $' \n'
 
 echo "Copy and paste vk for generating a Solidity Verifier contract"
-cp ./target/with_foundry_vk.bin ./target/vk
+cp ./target/fico_credit_score_vk.bin ./target/vk
 
 echo "Generate a Solidity Verifier contract"
 bb contract
