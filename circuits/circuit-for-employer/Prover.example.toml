@@ -1,0 +1,16 @@
+root = ""                       # @dev - Merkle Root
+index = ""
+hash_path = ["", ""]
+secret = ""
+annual_salary = ""              # @dev - Annual salary of the employee (in USD)
+
+[employeeVerificationLetterInfo] # "EmployeeVerificationLetterInfo" struct
+employee_name = ""              # @dev - bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
+employee_address = ""           # @dev - bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
+employee_phone_number = ""      # @dev - bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
+title = ""                      # @dev - bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
+contract_type = ""              # @dev - "Full Time" or "Part Time" / bytes (Sould be converted from String to bytes - before inputing here)
+annual_salary_in_struct = ""    # @dev - Annual salary of the employee (in USD)
+employment_start_date = ""
+employment_end_date = ""
+letter_created_date = ""
