@@ -1,28 +1,33 @@
 pragma solidity ^0.8.17;
 
-import "../contracts/Starter.sol";
-import "../circuits/target/contract.sol";
+import "../../../contracts/borrower/MortgageAffordabilityProofVerifier.sol";
+import "../../../circuits/circuit-for-borrower/target/contract.sol";
 import "forge-std/console.sol";
 
 import "forge-std/Test.sol";
 import {NoirHelper} from "foundry-noir-helper/NoirHelper.sol";
 
 
-contract StarterTest is Test {
-    Starter public starter;
+contract MortgageAffordabilityProofVerifierOnSonicTestnetTest is Test {
+    MortgageAffordabilityProofVerifier public mortgageAffordabilityProofVerifier;
     UltraVerifier public verifier;
     NoirHelper public noirHelper;
 
     function setUp() public {
         noirHelper = new NoirHelper();
-        verifier = new UltraVerifier();
-        starter = new Starter(verifier);
+        
+        address ULTRA_VERIFIER = vm.envAddress("ULTRAVERIFER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
+        address STARTER = vm.envAddress("MORTGAGE_AFFORDABILITY_PROOF_VERIFIER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
+        verifier = UltraVerifier(ULTRA_VERIFIER);
+        //verifier = new UltraVerifier();
+        mortgageAffordabilityProofVerifier = MortgageAffordabilityProofVerifier(STARTER);
+        //starter = new Starter(verifier);
     }
 
     function test_verifyProof() public {
         noirHelper.withInput("x", 1).withInput("y", 1).withInput("return", 1);
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 2);
-        starter.verifyEqual(proof, publicInputs);
+        mortgageAffordabilityProofVerifier.verifyEqual(proof, publicInputs);
     }
 
     function test_wrongProof() public {
@@ -30,7 +35,7 @@ contract StarterTest is Test {
         noirHelper.withInput("x", 1).withInput("y", 5).withInput("return", 5);
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_wrongProof", 2);
         vm.expectRevert();
-        starter.verifyEqual(proof, publicInputs);
+        mortgageAffordabilityProofVerifier.verifyEqual(proof, publicInputs);
     }
 
     // function test_all() public {

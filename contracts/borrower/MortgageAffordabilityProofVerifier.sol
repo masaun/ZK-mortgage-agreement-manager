@@ -1,8 +1,8 @@
 pragma solidity ^0.8.17;
 
-import "../circuits/target/contract.sol";
+import "../../circuits/circuit-for-borrower/target/contract.sol";
 
-contract Starter {
+contract MortgageAffordabilityProofVerifier {
     UltraVerifier public verifier;
 
     constructor(UltraVerifier _verifier) {

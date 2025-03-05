@@ -1,13 +1,13 @@
 pragma solidity ^0.8.17;
 
 import "forge-std/Script.sol";
-import "../../circuits/target/contract.sol";
-import "../../contracts/Starter.sol";
+import "../../../circuits/circuit-for-FICO/target/contract.sol";
+import "../../../contracts/FICO/FICOCreditScoreProofVerifier.sol";
 
 import { console2 } from "forge-std/console2.sol";
 
 contract VerifyScript is Script {
-    Starter public starter;
+    FICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
     UltraVerifier public verifier;
 
     function setUp() public {}
@@ -19,11 +19,11 @@ contract VerifyScript is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         address ULTRA_VERIFIER = vm.envAddress("ULTRAVERIFER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
-        address STARTER = vm.envAddress("STARTER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
+        address FICO_CREDIT_SCORE_PROOF_VERIFIER = vm.envAddress("FICO_CREDIT_SCORE_PROOF_VERIFIER_ON_SONIC_TESTNET");
         verifier = UltraVerifier(ULTRA_VERIFIER);
         //verifier = new UltraVerifier();
-        starter = Starter(STARTER);
-        //starter = new Starter(verifier);
+        ficoCreditScoreProofVerifier = FICOCreditScoreProofVerifier(FICO_CREDIT_SCORE_PROOF_VERIFIER);
+        //ficoCreditScoreProofVerifier = new FICOCreditScoreProofVerifier(verifier);
 
         bytes memory proof_w_inputs = vm.readFileBinary("./circuits/target/with_foundry_proof.bin");
         bytes memory proofBytes = sliceAfter64Bytes(proof_w_inputs);
@@ -35,7 +35,7 @@ contract VerifyScript is Script {
         //correct[0] = bytes32(0x0000000000000000000000000000000000000000000000000000000000000001); // [Expect]: Reverted (= Invalid Proof)
         correct[1] = correct[0];
 
-        bool equal = starter.verifyEqual(proofBytes, correct);
+        bool equal = ficoCreditScoreProofVerifier.verifyEqual(proofBytes, correct);
         console2.logBool(equal); /// [Log]: true
         return equal;
     }

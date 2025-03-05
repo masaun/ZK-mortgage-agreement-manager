@@ -1,11 +1,11 @@
 pragma solidity ^0.8.17;
 
 import "forge-std/Script.sol";
-import "../../circuits/target/contract.sol";
-import "../../contracts/Starter.sol";
+import "../../../circuits/circuit-for-FICO/target/contract.sol";
+import "../../../contracts/FICO/FICOCreditScoreProofVerifier.sol";
 
-contract StarterScript is Script {
-    Starter public starter;
+contract FICOCreditScoreProofVerifierScript is Script {
+    FICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
     UltraVerifier public verifier;
 
     function setUp() public {}
@@ -17,10 +17,10 @@ contract StarterScript is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         address ULTRA_VERIFIER = vm.envAddress("ULTRAVERIFER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
-        address STARTER = vm.envAddress("STARTER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
+        address FICO_CREDIT_SCORE_PROOF_VERIFIER = vm.envAddress("FICO_CREDIT_SCORE_PROOF_VERIFIER_ON_SONIC_TESTNET");
         verifier = UltraVerifier(ULTRA_VERIFIER);
         //verifier = new UltraVerifier();
-        starter = Starter(STARTER);
-        //starter = new Starter(verifier);
+        ficoCreditScoreProofVerifier = FICOCreditScoreProofVerifier(FICO_CREDIT_SCORE_PROOF_VERIFIER);
+        //ficoCreditScoreProofVerifier = new FICOCreditScoreProofVerifier(verifier);
     }
 }
