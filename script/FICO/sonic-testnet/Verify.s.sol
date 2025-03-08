@@ -1,7 +1,8 @@
 pragma solidity ^0.8.17;
 
 import "forge-std/Script.sol";
-import "../../../circuits/circuit-for-FICO/target/contract.sol";
+import { UltraVerifier } from "../../../contracts/FICO/circuit/plonk_vk.sol";
+//import "../../../circuits/circuit-for-FICO/target/contract.sol";
 import "../../../contracts/FICO/FICOCreditScoreProofVerifier.sol";
 
 import { console2 } from "forge-std/console2.sol";

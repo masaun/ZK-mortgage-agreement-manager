@@ -1,6 +1,7 @@
 pragma solidity ^0.8.17;
 
-import "../../circuits/circuit-for-employer/target/contract.sol";
+import "./circuit/plonk_vk.sol";
+//import "../../circuits/circuit-for-employer/target/contract.sol";
 
 contract EmploymentVerificationLetterProofVerifier {
     UltraVerifier public verifier;

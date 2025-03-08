@@ -1,7 +1,8 @@
 pragma solidity ^0.8.17;
 
 import "forge-std/Script.sol";
-import "../../../circuits/circuit-for-employer/target/contract.sol";
+import { UltraVerifier } from "../../../contracts/employer/circuit/plonk_vk.sol";
+//import "../../../circuits/circuit-for-employer/target/contract.sol";
 import "../../../contracts/employer/EmploymentVerificationLetterProofVerifier.sol";
 
 import { console2 } from "forge-std/console2.sol";
