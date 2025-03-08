@@ -3,7 +3,7 @@ out
 proofs
 broadcast
 .env
-plonk_vk.sol
+#plonk_vk.sol
 
 circuits/circuit-for-borrower/target/*
 circuits/circuit-for-employer/target/*
