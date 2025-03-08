@@ -3,8 +3,8 @@ pragma solidity ^0.8.17;
 import "forge-std/Script.sol";
 
 /// @dev - ZK (Ultraplonk) circuit, which is generated in Noir.
-import { UltraVerifier } from "../../../circuits/target/contract.sol"; /// @dev - Deployed-Verifier SC, which was generated based on the main.nr
-import { Starter } from "../../../contracts/Starter.sol";
+import { UltraVerifier } from "../../../../circuits/circuit-for-FICO/target/contract.sol"; /// @dev - Deployed-Verifier SC, which was generated based on the main.nr
+import { FICOCreditScoreProofVerifier } from "../../../../contracts/FICO/FICOCreditScoreProofVerifier.sol";
 
 //import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
@@ -17,7 +17,7 @@ contract DeploymentAllContracts is Script {
     //using SafeERC20 for MockRewardToken;
 
     UltraVerifier public verifier;
-    Starter public starter;
+    FICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
 
     function setUp() public {}
 
@@ -29,7 +29,7 @@ contract DeploymentAllContracts is Script {
 
         //vm.startBroadcast();
         verifier = new UltraVerifier();
-        starter = new Starter(verifier);
+        ficoCreditScoreProofVerifier = new FICOCreditScoreProofVerifier(verifier);
 
         vm.stopBroadcast();
 

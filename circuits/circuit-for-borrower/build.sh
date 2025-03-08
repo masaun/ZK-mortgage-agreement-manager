@@ -8,19 +8,19 @@ echo "Generate witness..."
 nargo execute
 
 echo "Proving and generating a ZK Proof..."
-bb prove -b ./target/with_foundry.json -w ./target/with_foundry.gz -o ./target/with_foundry_proof.bin
+bb prove -b ./target/mortgage_affordability.json -w ./target/mortgage_affordability.gz -o ./target/mortgage_affordability_proof.bin
 
 echo "Generating vkey..."
-bb write_vk -b ./target/with_foundry.json -o ./target/with_foundry_vk.bin
+bb write_vk -b ./target/mortgage_affordability.json -o ./target/mortgage_affordability_vk.bin
 
 echo "Link vkey to the zkProof"
-bb verify -k ./target/with_foundry_vk.bin -p ./target/with_foundry_proof.bin
+bb verify -k ./target/mortgage_affordability_vk.bin -p ./target/mortgage_affordability_proof.bin
 
 echo "Check a zkProof"
-head -c 32 ./target/with_foundry_proof.bin | od -An -v -t x1 | tr -d $' \n'
+head -c 32 ./target/mortgage_affordability_proof.bin | od -An -v -t x1 | tr -d $' \n'
 
 echo "Copy and paste vk for generating a Solidity Verifier contract"
-cp ./target/with_foundry_vk.bin ./target/vk
+cp ./target/mortgage_affordability_vk.bin ./target/vk
 
 echo "Generate a Solidity Verifier contract"
 bb contract
