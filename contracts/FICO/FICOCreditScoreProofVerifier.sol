@@ -1,6 +1,7 @@
 pragma solidity ^0.8.17;
 
-import "../../circuits/circuit-for-FICO/target/contract.sol";
+import "./circuit/plonk_vk.sol";
+//import "../../circuits/circuit-for-FICO/target/contract.sol";
 
 contract FICOCreditScoreProofVerifier {
     UltraVerifier public verifier;

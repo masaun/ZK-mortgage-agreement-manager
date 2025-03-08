@@ -1,7 +1,8 @@
 pragma solidity ^0.8.17;
 
 import "forge-std/Script.sol";
-import "../../../circuits/circuit-for-borrower/target/contract.sol";
+import { UltraVerifier } from "../../../contracts/borrower/circuit/plonk_vk.sol";
+//import "../../../circuits/circuit-for-borrower/target/contract.sol";
 import "../../../contracts/borrower/MortgageAffordabilityProofVerifier.sol";
 
 contract MortgageAffordabilityProofVerifierScript is Script {
