@@ -25,4 +25,10 @@ cp ./target/employment_verification_letter_vk.bin ./target/vk
 echo "Generate a Solidity Verifier contract"
 bb contract
 
+echo "Copy a Solidity Verifier contract-generated into the ./contracts/employer/circuit directory"
+cp ./target/contract.sol ../../contracts/employer/circuit
+
+echo "Rename the contract.sol with the plonk_vk.sol in the ./contracts/employer/circuit directory"
+mv ../../contracts/employer/circuit/contract.sol ../../contracts/employer/circuit/plonk_vk.sol
+
 echo "Done"
