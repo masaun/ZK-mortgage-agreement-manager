@@ -1,0 +1,16 @@
+root = "0x215597bacd9c7e977dfc170f320074155de974be494579d2586e5b268fa3b629"
+index = "0"
+hash_path = [
+  "0x1efa9d6bb4dfdf86063cc77efdec90eb9262079230f1898049efad264835b6c8",
+  "0x2a653551d87767c545a2a11b29f0581a392b4e177a87c8e3eb425c51a26a8c77"
+]
+secret = "1"
+credit_score = 800
+
+[ficoCreditScoreInfo] # "FICOCreditScoreInfo" struct
+customer_name = "1"
+customer_address = "1"
+customer_phone_number = "1"
+credit_score_in_struct = 800
+credit_score_created_date = 1741073225
+
