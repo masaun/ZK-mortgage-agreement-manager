@@ -31,7 +31,6 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
 
         noirHelper.withInput("root", bytes32(uint256(0x215597bacd9c7e977dfc170f320074155de974be494579d2586e5b268fa3b629)))
                   .withInput("hash_path", hash_path_bytes32)
-                  //.withInput("hash_path", hash_path)
                   .withInput("index", bytes32(uint256(0)))
                   .withInput("secret", bytes32(uint256(1))) /// @dev - [NOTE]: 'Field' type in Noir must be the form of this (= bytes32(uint256(XXX))).
                   .withInput("annual_salary", bytes32(uint256(55000)))
@@ -54,7 +53,7 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
                   .withStruct("employeeVerificationLetterInfo")
                   .withStructInput("letter_created_date", bytes32(uint256(1741073225)));
 
-        (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 3);
+        (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("circuit-for-employer/test_verifyProof", 3);
         employmentVerificationLetterProofVerifier.verifyEqual(proof, publicInputs);
     }
 
