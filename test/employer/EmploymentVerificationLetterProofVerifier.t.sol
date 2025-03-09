@@ -52,9 +52,9 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
                   .withStructInput("employment_end_date", bytes32(uint256(1772663219)))
                   .withStruct("employeeVerificationLetterInfo")
                   .withStructInput("letter_created_date", bytes32(uint256(1741073225)))
-                  .withProjectPath("./circuits/circuit-for-employer/"); /// @dev - Custom file path for the circuit file.
+                  .withProjectPath("./circuits/circuit-for-employer"); /// @dev - Custom file path for the circuit file.
 
-        (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 3);
+        (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 3); /// @dev - Generate the 'test_verifyProof' file in the ./circuits directory.
         employmentVerificationLetterProofVerifier.verifyEqual(proof, publicInputs);
     }
 
