@@ -1,6 +1,9 @@
 mod test_inputs; // test_inputs.nr
 
 mod tests {
+
+// error: Expected type MortgageLoanAssessmentData, found type MortgageLoanAssessmentData
+
     use crate::main; // src/main.nr
     // use crate::MAX_DATA_LENGTH;
     // use crate::tests::test_inputs::TestCase1::{
@@ -38,7 +41,7 @@ mod tests {
             hash_path,
             index,
             secret,
-            mortgageLoanAssessmentData
+            mortgageLoanAssessmentData,
         );
 
         let note_commitment = std::hash::pedersen_hash([secret]);

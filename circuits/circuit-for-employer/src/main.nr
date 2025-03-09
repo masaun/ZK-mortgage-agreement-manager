@@ -1,7 +1,8 @@
 use dep::std;
 mod tests; // tests/mod.nr
+//mod data_types; // data_types/data_types.nr
 
-struct EmployeeVerificationLetterInfo {
+pub struct EmployeeVerificationLetterInfo {
     employee_name: Field,          // bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
     employee_address: Field,       // bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
     employee_phone_number: Field,  // bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
@@ -16,10 +17,10 @@ struct EmployeeVerificationLetterInfo {
 /**
  * @notice - This is the ZK circuit for proving/verifying a proof of "Employment (Income) Verification Letter".
  */
-fn main(
+pub fn main(
     root: pub Field, // @dev - Merkle Root
-    index: Field,
     hash_path: [Field; 2],
+    index: Field,
     secret: Field,          // @dev - a secret code that was distributed to each voter (before the voting starts)
     annual_salary: pub u64, // @dev - Annual salary of the employee (in USD)
     employeeVerificationLetterInfo: EmployeeVerificationLetterInfo
