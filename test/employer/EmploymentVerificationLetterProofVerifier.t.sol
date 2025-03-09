@@ -36,25 +36,25 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
                   .withInput("annual_salary", bytes32(uint256(55000)))
                   .withStruct("employeeVerificationLetterInfo")
                   .withStructInput("employee_name", bytes32(uint256(1)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("employee_address", bytes32(uint256(1)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("employee_phone_number", bytes32(uint256(1)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("title", bytes32(uint256(1)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("contract_type", bytes32(uint256(1)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("annual_salary_in_struct", bytes32(uint256(55000)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("employment_start_date", bytes32(uint256(1741127219)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("employment_end_date", bytes32(uint256(1772663219)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  //.withStruct("employeeVerificationLetterInfo")
                   .withStructInput("letter_created_date", bytes32(uint256(1741073225)))
-                  .withProjectPath("./circuits/circuit-for-employer/"); /// @dev - Custom file path for the circuit file.
+                  .withProjectPath("./circuits/circuit-for-employer"); /// @dev - Custom file path for the circuit file.
 
-        (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 3);
+        (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 3); /// @dev - Generate the 'test_verifyProof' file in the ./circuits directory.
         employmentVerificationLetterProofVerifier.verifyEqual(proof, publicInputs);
     }
 

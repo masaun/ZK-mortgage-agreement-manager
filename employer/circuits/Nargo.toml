@@ -1,0 +1,8 @@
+[package]
+name="employment_verification_letter"
+type="bin"
+# entry = "circuit-for-employer/src/main.nr"
+authors = ["critesjosh"]
+compiler_version = ">=0.31.0"
+
+[dependencies]
