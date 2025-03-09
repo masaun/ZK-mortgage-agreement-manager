@@ -1,0 +1,12 @@
+root = ""                       # @dev - Merkle Root
+index = ""
+hash_path = ["", ""]
+secret = ""
+credit_score = 0
+
+[ficoCreditScoreInfo] # "FICOCreditScoreInfo" struct
+customer_name = "",            # bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
+customer_address = "",         # bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
+customer_phone_number = "",    # bytes (Sould be converted from String to bytes via abi.encodePacked() - before inputing here)
+credit_score_in_struct = 0,    # @dev - Annual salary of the employee (in USD)
+credit_score_created_date = 0
