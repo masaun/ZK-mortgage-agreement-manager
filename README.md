@@ -91,7 +91,7 @@ sh ./script/electroneum-testnet/verify-script.sh
 
 <br>
 
-## Smart Contract - Test on Local Network / Sonic Testnet / Electroneum Testnet
+## Smart Contract - Test on Local Network / Sonic Testnet
 
 - Run the test of the `Starter.t.sol`, which is the test file of the `Starter.sol` on Local Network.
 ```shell
@@ -107,9 +107,9 @@ sh ./test/sonic-testnet/runningTest_Sonic-Testnet.sh
 
 <br>
 
-- Run the test of the `StarterOnElectroneumTestnet.t.sol`, which is the test file of the `Starter.sol` on Electroneum Testnet.
+- Run the test of the `EmploymentVerificationLetterProofVerifier.t.sol`, which is the test file of the `EmploymentVerificationLetterProofVerifier.sol` on Sonic Testnet.
 ```bash
-sh ./test/electroneum-testnet/runningTest_Electroneum-Testnet.sh
+sh ./test/employer/runningTest_EmploymentVerificationLetterProofVerifier.sh
 ```
 
 
