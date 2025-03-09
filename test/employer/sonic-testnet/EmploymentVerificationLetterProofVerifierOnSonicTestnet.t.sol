@@ -42,12 +42,12 @@ contract EmploymentVerificationLetterProofVerifierOnSonicTestnetTest is Test {
         // credit_score_in_struct = 800
         // credit_score_created_date = 1741073225
 
-        noirHelper.withInput("root", "0x215597bacd9c7e977dfc170f320074155de974be494579d2586e5b268fa3b629")
-                  .withInput("index", "0")
-                  .withInput("hash_path", ["0x1efa9d6bb4dfdf86063cc77efdec90eb9262079230f1898049efad264835b6c8", "0x2a653551d87767c545a2a11b29f0581a392b4e177a87c8e3eb425c51a26a8c77"])
-                  .withInput("secret", "1")
-                  .withInput("credit_score", 800)
-                  .withInput("ficoCreditScoreInfo", "1", "1", "1", 800, 1741073225);
+        // noirHelper.withInput("root", "0x215597bacd9c7e977dfc170f320074155de974be494579d2586e5b268fa3b629")
+        //           .withInput("index", "0")
+        //           .withInput("hash_path", ["0x1efa9d6bb4dfdf86063cc77efdec90eb9262079230f1898049efad264835b6c8", "0x2a653551d87767c545a2a11b29f0581a392b4e177a87c8e3eb425c51a26a8c77"])
+        //           .withInput("secret", "1")
+        //           .withInput("credit_score", 800)
+        //           .withInput("ficoCreditScoreInfo", "1", "1", "1", 800, 1741073225);
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 2);
         employmentVerificationLetterProofVerifier.verifyEqual(proof, publicInputs);
     }
