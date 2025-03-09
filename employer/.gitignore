@@ -5,9 +5,7 @@ broadcast
 .env
 #plonk_vk.sol
 
-circuits/circuit-for-borrower/target/*
-circuits/circuit-for-employer/target/*
-circuits/circuit-for-FICO/target/*
+circuits/target/*
 
 .DS_Store
 ./circuits/.DS_Store
@@ -15,16 +13,11 @@ circuits/circuit-for-FICO/target/*
 ./script/.DS_Store
 ./test/.DS_Store
 
-circuits/circuit-for-borrower/Prover.toml
-circuits/circuit-for-employer/Prover.toml
-circuits/circuit-for-FICO/Prover.toml
-circuits/circuit-for-borrower/Verifier.toml
-circuits/circuit-for-employer/Verifier.toml
-circuits/circuit-for-FICO/Verifier.toml
+circuits/Prover.toml
+circuits/Verifier.toml
 
-circuits/circuit-for-borrower/test_verifyProof.toml
-circuits/circuit-for-employer/test_verifyProof.toml
-circuits/circuit-for-FICO/test_verifyProof.toml
+circuits/test_verifyProof.toml
+circuits/test_wrongProof.toml
 
 node_modules
 package-lock.json
