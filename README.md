@@ -1,4 +1,37 @@
-# ZK Sonic in Noir
+# ZK Mortgage Loan Agreement Manager
+
+## Tech Stack
+- `ZK circuit`: Written in [`Noir`](https://noir-lang.org/docs/) powered by [Aztec](https://aztec.network/)) 
+- Smart Contract: Written in Solidity (Framework: Foundry)
+- Blockchain: [`Sonic`](https://docs.soniclabs.com/sonic/build-on-sonic/getting-started) (Testnet)
+
+<br>
+
+
+## Overview
+
+<br>
+
+## Deployed-smart contracts on [`Sonic` Testnet](https://docs.soniclabs.com/sonic/build-on-sonic/getting-started)
+
+| Contract Name | Descripttion | Deployed-contract addresses on Sonic Testnet |
+| ------------- |:-------------:| -----:|
+| UltraVerifier (for the EmploymentVerificationLetterProof) | The UltraPlonk Verifer contract for the EmploymentVerificationLetterProof (`./employer/contracts/circuit/plonk_vk.sol`), which is generated based on ZK circuit in Noir (`./circuits/src/main.nr`). FYI: To generated this contract, the way of the [Noir's Solidity Verifier generation](https://noir-lang.org/docs/how_to/how-to-solidity-verifier) was used. | [0x621dbc8010E0d5Aa2b11a5103c9833eC94a70E39](https://testnet.sonicscan.org/address/0x621dbc8010e0d5aa2b11a5103c9833ec94a70e39) |
+| EmploymentVerificationLetterProofVerifier | The smart contract that enable to validate whether or not a EmploymentVerificationLetterProof-submitted is valid. | [0xEd1324385Fe64c83687C3f9576F3210c6B8E309E](https://testnet.sonicscan.org/address/0xed1324385fe64c83687c3f9576f3210c6b8e309e) |
+
+| UltraVerifier (for the FICOCreditScoreProof) | The UltraPlonk Verifer contract for the EmploymentVerificationLetterProof (`./FICO/contracts/circuit/plonk_vk.sol`), which is generated based on ZK circuit in Noir (`./circuits/src/main.nr`). FYI: To generated this contract, the way of the [Noir's Solidity Verifier generation](https://noir-lang.org/docs/how_to/how-to-solidity-verifier) was used. | [0xEa8EB5CFf49241B39950c31f788AEF8E0d4Df1c1](https://testnet.sonicscan.org/address/0xEa8EB5CFf49241B39950c31f788AEF8E0d4Df1c1) |
+| FICOCreditScoreProofVerifier | The smart contract that enable to validate whether or not a EmploymentVerificationLetterProof-submitted is valid. | [0x20a414abEcFe31DD27Aa7FcCC353a505E976D277](https://testnet.sonicscan.org/address/0x20a414abEcFe31DD27Aa7FcCC353a505E976D277) |
+
+| UltraVerifier (for the MortgageAffordabilityProof) | The UltraPlonk Verifer contract for the EmploymentVerificationLetterProof (`./borrower/contracts/circuit/plonk_vk.sol`), which is generated based on ZK circuit in Noir (`./circuits/src/main.nr`). FYI: To generated this contract, the way of the [Noir's Solidity Verifier generation](https://noir-lang.org/docs/how_to/how-to-solidity-verifier) was used. | [0x2317106a73E00fc66AB25aD50979CFf140075b2b](https://testnet.sonicscan.org/address/0x2317106a73E00fc66AB25aD50979CFf140075b2b) |
+| MortgageAffordabilityProofVerifier | The smart contract that enable to validate whether or not a MortgageAffordabilityProof-submitted is valid. | [0x7a2E68d1d1bB79dBc945801A02Bd6e17d0842457](https://testnet.sonicscan.org/address/0x7a2E68d1d1bB79dBc945801A02Bd6e17d0842457) |
+
+| MortgageAgreementManager | The smart contract that enable a borrower to create a request of the mortgage agreement /w three ZK proofs (`EmploymentVerificationLetterProof`, `FICOCreditScoreProof`, `MortgageAffordabilityProof`) and enable a lender to accept these request | [0x0A95E7Fc5c292eCe47893E63A1380f08a061814A](https://blockexplorer.thesecurityteam.rocks/address/0x0A95E7Fc5c292eCe47893E63A1380f08a061814A) |
+
+
+
+<br>
+
+<hr>
 
 # Installations
 
@@ -157,151 +190,18 @@ forge script script/electroneum-testnet/deployment/DeploymentAllContracts.s.sol 
     ./Starter.sol:Starter --skip-simulation --legacy
 ```
 
+
 <br>
 
-<hr>
 
-# Noir with Foundry
+## References and Resources
 
-This example uses Foundry to deploy and test a verifier.
+- Noir:
+  - Doc: https://noir-lang.org/docs/getting_started/quick_start
+  - `noir-starter` (for Foundry): https://github.com/AztecProtocol/noir-starter/tree/main/with-foundry
 
-## Getting Started
 
-Want to get started in a pinch? Start your project in a free Github Codespace!
-
-[![Start your project in a free Github Codespace!](https://github.com/codespaces/badge.svg)](https://codespaces.new/noir-lang/noir-starter)
-
-In the meantime, follow these simple steps to work on your own machine:
-
-Install [noirup](https://noir-lang.org/docs/getting_started/noir_installation) with
-
-1. Install [noirup](https://noir-lang.org/docs/getting_started/noir_installation):
-
-   ```bash
-   curl -L https://raw.githubusercontent.com/noir-lang/noirup/main/install | bash
-   ```
-
-2. Install Nargo:
-
-   ```bash
-   noirup
-   ```
-
-3. Install foundryup and follow the instructions on screen. You should then have all the foundry
-   tools like `forge`, `cast`, `anvil` and `chisel`.
-
-```bash
-curl -L https://foundry.paradigm.xyz | bash
-```
-
-4. Install foundry dependencies by running `forge install 0xnonso/foundry-noir-helper --no-commit`.
-
-5. Install `bbup`, the tool for managing Barretenberg versions, by following the instructions
-   [here](https://github.com/AztecProtocol/aztec-packages/blob/master/barretenberg/bbup/README.md#installation).
-
-6. Then run `bbup`.
-
-## Generate verifier contract and proof
-
-### Contract
-
-The deployment assumes a verifier contract has been generated by nargo. In order to do this, run:
-
-```bash
-cd circuits
-nargo compile
-bb write_vk -b ./target/with_foundry.json
-bb contract
-```
-
-A file named `contract.sol` should appear in the `circuits/target` folder.
-
-### Test with Foundry
-
-We're ready to test with Foundry. There's a basic test inside the `test` folder that deploys the
-verifier contract, the `Starter` contract and two bytes32 arrays correspondent to good and bad
-solutions to your circuit.
-
-By running the following command, forge will compile the contract with 5000 rounds of optimization
-and the London EVM version. **You need to use these optimizer settings to suppress the "stack too
-deep" error on the solc compiler**. Then it will run the test, expecting it to pass with correct
-inputs, and fail with wrong inputs:
-
-```bash
-forge test --optimize --optimizer-runs 5000 --evm-version cancun
-```
-
-#### Testing On-chain
-
-You can test that the Noir Solidity verifier contract works on a given chain by running the
-`Verify.s.sol` script against the appropriate RPC endpoint.
-
-```bash
-forge script script/Verify.s.sol --rpc-url $RPC_ENDPOINT  --broadcast
-```
-
-If that doesn't work, you can add the network to Metamask and deploy and test via
-[Remix](https://remix.ethereum.org/).
-
-Note that some EVM network infrastructure may behave differently and this script may fail for
-reasons unrelated to the compatibility of the verifier contract.
-
-### Deploy with Foundry
-
-This template also has a script to help you deploy on your own network. But for that you need to run
-your own node or, alternatively, deploy on a testnet.
-
-#### (Option 1) Run a local node
-
-If you want to deploy locally, run a node by opening a terminal and running
-
-```bash
-anvil
-```
-
-This should start a local node listening on `http://localhost:8545`. It will also give you many
-private keys.
-
-Edit your `.env` file to look like:
-
-```
-ANVIL_RPC=http://localhost:8545
-LOCALHOST_PRIVATE_KEY=<the private key you just got from anvil>
-```
-
-#### (Option 2) Prepare for testnet
-
-Pick a testnet like Sepolia or Goerli. Generate a private key and use a faucet (like
-[this one for Sepolia](https://sepoliafaucet.com/)) to get some coins in there.
-
-Edit your `.env` file to look like:
-
-```env
-SEPOLIA_RPC=https://rpc2.sepolia.org
-LOCALHOST_PRIVATE_KEY=<the private key of the account with your coins>
-```
-
-#### Run the deploy script
-
-You need to source your `.env` file before deploying. Do that with:
-
-```bash
-source .env
-```
-
-Then run the deployment with:
-
-```bash
-forge script script/Starter.s.sol --rpc-url $ANVIL_RPC --broadcast --verify
-```
-
-Replace `$ANVIL_RPC` with the testnet RPC, if you're deploying on a testnet.
-
-## Developing on this template
-
-This template doesn't include settings you may need to deal with syntax highlighting and
-IDE-specific settings (i.e. VScode). Please follow the instructions on the
-[Foundry book](https://book.getfoundry.sh/config/vscode) to set that up.
-
-It's **highly recommended** you get familiar with [Foundry](https://book.getfoundry.sh) before
-developing on this template.
+- Sonic: 
+  - Block Explorer (on Sonic Testnet): https://testnet.sonicscan.org/
+  - Doc (icl. RPC, etc): https://docs.soniclabs.com/sonic/build-on-sonic/getting-started
+  - Fancet: https://testnet.soniclabs.com/account
