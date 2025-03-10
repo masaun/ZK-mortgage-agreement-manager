@@ -1,6 +1,6 @@
 pragma solidity ^0.8.17;
 
-import "./circuit/plonk_vk.sol";
+import { UltraVerifier } from "./circuit/plonk_vk.sol";
 //import "../../circuits/circuit-for-borrower/target/contract.sol";
 
 contract MortgageAffordabilityProofVerifier {
