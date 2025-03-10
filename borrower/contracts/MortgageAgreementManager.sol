@@ -31,50 +31,58 @@ contract MortgageAgreementManager {
         mortgageAffordabilityProofVerifier = _mortgageAffordabilityProofVerifier;
     }
 
-    function storeEmploymentVerificationLetterProof(bytes calldata proof, bytes32[] calldata publicInputs) private returns (bool) {
+    function storeEmploymentVerificationLetterProof(bytes calldata proof, bytes32[] calldata publicInputs) external returns (bool) {
         /// @dev - Check whether or not a give proof is a valid proof.
         bool proofResult = employmentVerificationLetterProofVerifier.verifyEmploymentVerificationLetterProof(proof, publicInputs);
         require(proofResult, "Proof is not valid");
 
         /// @dev - Store the employment verification letter proof and publicInput /w nullifier.
-        // bytes32 _merkleRoot = publicInputs[0];
-        // bytes32 _annualSalary = publicInputs[1];
-        // bytes32 _nullifier = publicInputs[2];
-        // employmentVerificationLetterProofsAndPublicInputs[proof] = DataTypes.EmploymentVerificationLetterProofAndPublicInput({
-        //     merkleRoot: _merkleRoot,
-        //     annualSalary: _annualSalary,
-        //     nullifier: _nullifier,
-        //     isNullifier: true
-        // });
-        employmentVerificationLetterProofsAndPublicInputs[proof] = DataTypes.EmploymentVerificationLetterProofAndPublicInput(
-            publicInputs[0],
-            publicInputs[1],
-            publicInputs[2],
-            true
-        );
+        bytes32 _merkleRoot = publicInputs[0];
+        bytes32 _annualSalary = publicInputs[1];
+        bytes32 _nullifier = publicInputs[2];
+        employmentVerificationLetterProofsAndPublicInputs[proof] = DataTypes.EmploymentVerificationLetterProofAndPublicInput({
+            merkleRoot: _merkleRoot,
+            annualSalary: _annualSalary,
+            nullifier: _nullifier,
+            isNullifier: true
+        });
+        // employmentVerificationLetterProofsAndPublicInputs[proof] = DataTypes.EmploymentVerificationLetterProofAndPublicInput(
+        //     publicInputs[0],
+        //     publicInputs[1],
+        //     publicInputs[2],
+        //     true
+        // );
     }
 
-    function storeFICOCreditScoreProof(bytes calldata proof, bytes32[] calldata publicInputs) private returns (bool) {    
+    function getEmploymentVerificationLetterProofsAndPublicInputs(bytes calldata proof) private returns (DataTypes.EmploymentVerificationLetterProofAndPublicInput memory) {
+        return employmentVerificationLetterProofsAndPublicInputs[proof];
+    }
+
+    function storeFICOCreditScoreProof(bytes calldata proof, bytes32[] calldata publicInputs) external returns (bool) {    
         /// @dev - Check whether or not a give proof is a valid proof.
         bool proofResult = ficoCreditScoreProofVerifier.verifyFICOCreditScoreProof(proof, publicInputs);
         require(proofResult, "Proof is not valid");
 
         /// @dev - Store the FICO credit score proof and publicInput /w nullifier.
-        // bytes32 _merkleRoot = publicInputs[0];
-        // bytes32 _creditScore = publicInputs[1];
-        // bytes32 _nullifier = publicInputs[2];
-        // ficoCreditScoreProofsAndPublicInputs[proof] = DataTypes.FICOCreditScoreProofAndPublicInput({
-        //     merkleRoot: _merkleRoot,
-        //     creditScore: _creditScore,
-        //     nullifier: _nullifier,
-        //     isNullifier: true
-        // });
-        ficoCreditScoreProofsAndPublicInputs[proof] = DataTypes.FICOCreditScoreProofAndPublicInput(
-            publicInputs[0],
-            publicInputs[1],
-            publicInputs[2],
-            true
-        );
+        bytes32 _merkleRoot = publicInputs[0];
+        bytes32 _creditScore = publicInputs[1];
+        bytes32 _nullifier = publicInputs[2];
+        ficoCreditScoreProofsAndPublicInputs[proof] = DataTypes.FICOCreditScoreProofAndPublicInput({
+            merkleRoot: _merkleRoot,
+            creditScore: _creditScore,
+            nullifier: _nullifier,
+            isNullifier: true
+        });
+        // ficoCreditScoreProofsAndPublicInputs[proof] = DataTypes.FICOCreditScoreProofAndPublicInput(
+        //     publicInputs[0],
+        //     publicInputs[1],
+        //     publicInputs[2],
+        //     true
+        // );
+    }
+
+    function getFICOCreditScoreProofsAndPublicInputs(bytes calldata proof) private returns (DataTypes.FICOCreditScoreProofAndPublicInput memory) {
+        return ficoCreditScoreProofsAndPublicInputs[proof];
     }
 
     /**
@@ -84,17 +92,21 @@ contract MortgageAgreementManager {
     function createRequestOfMortgageAgreement(
         address lender,
         bytes calldata employmentVerificationLetterProof, 
-        bytes32[] calldata employmentVerificationLetterPublicInputs,
+        //bytes32[] calldata employmentVerificationLetterPublicInputs,
         bytes calldata ficoCreditScoreProof, 
-        bytes32[] calldata ficoCreditScorePublicInputs,
-        bytes calldata mortgageAffordabilityProof, 
+        //bytes32[] calldata ficoCreditScorePublicInputs,
+        bytes calldata mortgageAffordabilityProof,
         bytes32[] calldata mortgageAffordabilityPublicInputs
     ) public returns (bool) {
         /// @dev - Store the proof/publicInput data into the mapping storage of the employment verification letter and FICO credit score.
         //storeEmploymentVerificationLetterProof(employmentVerificationLetterProof, employmentVerificationLetterPublicInputs);
         //storeFICOCreditScoreProof(ficoCreditScoreProof, ficoCreditScorePublicInputs);
 
-        /// @dev - Check whether or not a give proof is a valid proof.
+        /// @dev - Check whether or not the give both proofs are a valid proof.
+        require(employmentVerificationLetterProofsAndPublicInputs[employmentVerificationLetterProof].isNullifier == true, "Employment verification letter proof is not valid");
+        require(ficoCreditScoreProofsAndPublicInputs[ficoCreditScoreProof].isNullifier == true, "FICO credit score proof is not valid");
+
+        /// @dev - Check whether or not a give mortgage affordability proof is a valid proof.
         bool proofResult = mortgageAffordabilityProofVerifier.verifyMortgageAffordabilityProof(mortgageAffordabilityProof, mortgageAffordabilityPublicInputs);
         require(proofResult, "Proof is not valid");
         
@@ -106,36 +118,36 @@ contract MortgageAgreementManager {
         //     nullifier: _nullifier,
         //     isNullifier: true
         // });
-        // mortgageAffordabilityProofsAndPublicInputs[mortgageAffordabilityProof] = DataTypes.MortgageAffordabilityProofAndPublicInput(
-        //     mortgageAffordabilityPublicInputs[0],
-        //     mortgageAffordabilityPublicInputs[1],
-        //     true
-        // );
+        mortgageAffordabilityProofsAndPublicInputs[mortgageAffordabilityProof] = DataTypes.MortgageAffordabilityProofAndPublicInput(
+            mortgageAffordabilityPublicInputs[0],
+            mortgageAffordabilityPublicInputs[1],
+            true
+        );
 
         /// @dev - Create a new mortgage agreement request.
         address _borrower = msg.sender;
-        // mortgageAgreements[msg.sender][lender] = DataTypes.MortgageAgreement({
-        //     borrower: _borrower,
-        //     lender: lender,
-        //     employmentVerificationLetterProof: employmentVerificationLetterProof,
-        //     employmentVerificationLetterPublicInputs: employmentVerificationLetterPublicInputs,
-        //     ficoCreditScoreProof: ficoCreditScoreProof,
-        //     ficoCreditScorePublicInputs: ficoCreditScorePublicInputs,
-        //     mortgageAffordabilityProof: mortgageAffordabilityProof,
-        //     mortgageAffordabilityPublicInputs: mortgageAffordabilityPublicInputs,
-        //     isAccepted: false
-        // });
-        mortgageAgreements[msg.sender][lender] = DataTypes.MortgageAgreement(
-            _borrower,
-            lender,
-            employmentVerificationLetterProof,
-            //employmentVerificationLetterPublicInputs,
-            ficoCreditScoreProof,
-            //ficoCreditScorePublicInputs,
-            mortgageAffordabilityProof,
-            //mortgageAffordabilityPublicInputs,
-            false
-        );
+        mortgageAgreements[msg.sender][lender] = DataTypes.MortgageAgreement({
+            borrower: _borrower,
+            lender: lender,
+            employmentVerificationLetterProof: employmentVerificationLetterProof,
+            //employmentVerificationLetterPublicInputs: employmentVerificationLetterPublicInputs,
+            ficoCreditScoreProof: ficoCreditScoreProof,
+            //ficoCreditScorePublicInputs: ficoCreditScorePublicInputs,
+            mortgageAffordabilityProof: mortgageAffordabilityProof,
+            //mortgageAffordabilityPublicInputs: mortgageAffordabilityPublicInputs,
+            isAccepted: false
+        });
+        // mortgageAgreements[msg.sender][lender] = DataTypes.MortgageAgreement(
+        //     _borrower,
+        //     lender,
+        //     employmentVerificationLetterProof,
+        //     //employmentVerificationLetterPublicInputs,
+        //     ficoCreditScoreProof,
+        //     //ficoCreditScorePublicInputs,
+        //     mortgageAffordabilityProof,
+        //     //mortgageAffordabilityPublicInputs,
+        //     false
+        // );
     }
 
     /**
