@@ -54,7 +54,9 @@ forge install 0xnonso/foundry-noir-helper
 
 <br>
 
-## ZK circuit - Generate (Prove) an Ultraplonk proof in Noir
+## ZK circuit - Generate (Prove) an Ultraplonk Proof in Noir
+
+There are three ZK circuits in total. For three ZK circuits in the three directory (`./employer/circuits`, `./FICO/circuits`, `./borrower/circuits`) respectively, the following installation should be done: 
 
 - 1/ Move to the `./circuits` directory:
 ```shell
@@ -67,97 +69,137 @@ cp Prover.example.toml Prover.toml
 ```
 
 - 3/ Write the `input data` should be written in the `Prover.toml`.
-  - [NOTE]: `"Boolean"` type data should be written in a string number (True: `"0"` / False: `"1"`).
-```toml
-return = ""
-x = ""
-y = ""
-```
 
 
-- 2/ Run the `build.sh` to run ZK circuit
+- 4/ Run the `build.sh` to run ZK circuit
 ```shell
 sh build.sh
 ```
 
-- 3/ The UltraVerifier contract (`contract.sol`) and `proof` and `vk` in Noir would be generated under the `./circuits/target`.
+- 5/ The UltraVerifier contract (`contract.sol`) and `proof` and `vk` in Noir would be generated under the `./circuits/target`.
+  - The UltraVerifier contract (`contract.sol`) is automatically copied to the `/contracts/circuit` as the `plonk_vk.sol`
 
 
 <br>
 
 ## ZK circuit - Test
-- Run the `circuit_test.sh` to test the ZK circuit. 
+- Run the `circuit_test.sh` to test the ZK circuit in the `./employer/circuits`. 
 ```shell
-cd circuits
+cd employer/circuits
 sh circuit_test.sh
 ```
+
+- Run the `circuit_test.sh` to test the ZK circuit in the `./FICO/circuits`. 
+```shell
+cd FICO/circuits
+sh circuit_test.sh
+```
+
+- Run the `circuit_test.sh` to test the ZK circuit in the `./borrower/circuits`. 
+```shell
+cd borrower/circuits
+sh circuit_test.sh
+```
+
 
 <br>
 
 ## Smart Contract - Compile
 
+There are three components of the smart contracts in total. For three type of the smart contracts in the three directory (`./employer/contracts`, `./FICO/contracts`, `./borrower/contracts`) respectively, the following installation should be done: 
+
 - Compile the smart contracts
 ```shell
+cd employer or FICO or borrower
 sh ./buildContract.sh
-```
-
-<br>
-
-## Smart Contract - Script on Sonic Testnet
-
-- Run the script of the `Starter.s.sol`, which is the test file of the `Starter.sol` on Sonic Testnet.
-```shell
-sh ./script/sonic-testnet/starter-script.sh
-```
-
-<br>
-
-- Run the script of the `Starter.s.sol`, which is the test file of the `Starter.sol` on Electroneum Testnet.
-```shell
-sh ./script/electroneum-testnet/starter-script.sh
-```
-
-<br>
-
-- Run the script of the `Verify.s.sol`, which is the test file of the `UltraVerifier.sol` on Sonic Testnet.
-```shell
-sh ./script/sonic-testnet/verify-script.sh
-```
-
-<br>
-
-- Run the script of the `Verify.s.sol`, which is the test file of the `UltraVerifier.sol` on Electroneum Testnet.
-```shell
-sh ./script/electroneum-testnet/verify-script.sh
 ```
 
 <br>
 
 ## Smart Contract - Test on Local Network / Sonic Testnet
 
-- Run the test of the `Starter.t.sol`, which is the test file of the `Starter.sol` on Local Network.
-```shell
-sh ./test/runningTest_1.sh
-```
+There are three components of the smart contract tests in total. For three components of the smart contracts in the three directory (`./employer/test`, `./FICO/test`, `./borrower/test`) respectively, the following installation should be done: 
 
-<br>
-
-- Run the test of the `StarterOnSonicTestnet.t.sol`, which is the test file of the `Starter.sol` on Sonic Testnet.
-```shell
-sh ./test/sonic-testnet/runningTest_Sonic-Testnet.sh
-```
-
-<br>
-
-- Run the test of the `EmploymentVerificationLetterProofVerifier.t.sol`, which is the test file of the `EmploymentVerificationLetterProofVerifier.sol` on Sonic Testnet.
+- Run the test of the `EmploymentVerificationLetterProofVerifier.t.sol`, which is the test file of the `EmploymentVerificationLetterProofVerifier.sol` on Local Network.
 ```bash
-sh ./test/employer/runningTest_EmploymentVerificationLetterProofVerifier.sh
+cd employer
+sh ./test/runningTest_EmploymentVerificationLetterProofVerifier.sh
 ```
-
 
 <br>
 
+- Run the test of the `EmploymentVerificationLetterProofVerifierOnSonicTestnet.t.sol`, which is the test file of the `EmploymentVerificationLetterProofVerifier.sol` on Sonic Testnet.
+```shell
+cd employer
+sh ./test/sonic-testnet/runningTest_EmploymentVerificationLetterProofVerifierOnSonicTestnet.sh
+```
 
+<br>
+
+- Run the test of the `FICOCreditScoreProofVerifier.t.sol`, which is the test file of the `EFICOCreditScoreProofVerifier.sol` on Local Network.
+```bash
+cd FICO
+sh ./test/runningTest_FICOCreditScoreProofVerifier.sh
+```
+
+<br>
+
+- Run the test of the `FICOCreditScoreProofVerifierOnSonicTestnet.t.sol`, which is the test file of the `FICOCreditScoreProofVerifier.sol` on Sonic Testnet.
+```shell
+cd FICO
+sh ./test/sonic-testnet/runningTest_EmploymentVerificationLetterProofVerifierOnSonicTestnet.sh
+```
+
+<br>
+
+- Run the test of the `MortgageAffordabilityProofVerifier.t.sol`, which is the test file of the `MortgageAffordabilityProofVerifier.sol` on Local Network.
+```bash
+cd borrower
+sh ./test/runningTest_MortgageAffordabilityProofVerifier.sh
+```
+
+<br>
+
+- Run the test of the `MortgageAffordabilityProofVerifierOnSonicTestnet.t.sol`, which is the test file of the `MortgageAffordabilityProofVerifier.sol` on Sonic Testnet.
+```shell
+cd borrower
+sh ./test/sonic-testnet/runningTest_MortgageAffordabilityProofVerifierOnSonicTestnet.sh
+```
+
+<br>
+
+- Run the test of the `MortgageAgreementManagerOnSonicTestnet.t.sol`, which is the test file of the `MortgageAgreementManager.sol` on Sonic Testnet.  
+  (NOTE: This test is still in progress)
+```shell
+cd borrower
+sh ./test/sonic-testnet/runningTest_MortgageAgreementManagerOnSonicTestnet.sh
+```
+
+<br>
+
+## Smart Contract - Script on Sonic Testnet
+
+- Run the script of the `EmploymentVerificationLetterProofVerifier.s.sol`, which is the test file of the `EmploymentVerificationLetterProofVerifier.sol` on Sonic Testnet.
+```shell
+cd employer
+sh ./script/sonic-testnet/runningScript_EmploymentVerificationLetterProofVerifier.sh
+```
+
+<br>
+
+- Run the script of the `FICOCreditScoreProofVerifier.s.sol`, which is the test file of the `UltraVerifier.sol` on Sonic Testnet.
+```shell
+cd FICO
+sh ./script/sonic-testnet/runningScript_FICOCreditScoreProofVerifier.sh
+```
+
+<br>
+
+- Run the script of the `MortgageAffordabilityProofVerifier.s.sol`, which is the test file of the `UltraVerifier.sol` on Sonic Testnet.
+```shell
+cd borrower
+sh ./script/sonic-testnet/runningScript_MortgageAffordabilityProofVerifier.sh
+```
 
 <br>
 
@@ -168,22 +210,22 @@ sh ./test/employer/runningTest_EmploymentVerificationLetterProofVerifier.sh
 - 1/ Create the `.env` file by coping the example file (`.env.example`) in the root directory.
   - Then, you should add a private key of your deployer address to the `SONIC_BLAZE_TESTNET_PRIVATE_KEY` /or the `ELECTRONEUM_TESTNET_PRIVATE_KEY`.
 ```shell
+cd employer or FICO or borrower
 cp .env.example .env
 ```
 
 - 2/ Deploy all contracts on Sonic Testnet by running the `script/DeploymentAllContracts.s.sol` 
 ```bash
+cd employer
 sh ./script/sonic-testnet/deployment/deployment-on-sonic-testnet.sh
-``
-Or, directly executing the following command:
-```bash
-/// [NOTE]: Execute the following at the root directory.
 
-forge script script/DeploymentAllContracts.s.sol --broadcast --private-key <SONIC_BLAZE_TESTNET_PRIVATE_KEY> \
-    ./circuits/target/contract.sol:UltraVerifier \
-    ./Starter.sol:Starter --skip-simulation
+cd FICO
+sh ./script/sonic-testnet/deployment/deployment-on-sonic-testnet.sh
+
+cd borrower
+sh ./script/sonic-testnet/deployment/deploymentScript_MortgageAffordabilityProofVerifier.sh
+sh ./script/sonic-testnet/deployment/deploymentScript_MortgageAgreementManager.sh
 ```
-
 
 <br>
 
