@@ -47,7 +47,7 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
                   //.withProjectPath("./circuits/circuit-for-employer"); /// @dev - Custom file path for the circuit file.
 
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 3); /// @dev - Generate the 'test_verifyProof' file in the ./circuits directory.
-        employmentVerificationLetterProofVerifier.verifyEqual(proof, publicInputs);
+        employmentVerificationLetterProofVerifier.verifyEmploymentVerificationLetterProof(proof, publicInputs);
     }
 
     function test_wrongProof() public {
@@ -88,7 +88,7 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
         fakePublicInputs[2] = publicInputs[2];
 
         vm.expectRevert();
-        employmentVerificationLetterProofVerifier.verifyEqual(proof, fakePublicInputs);
+        employmentVerificationLetterProofVerifier.verifyEmploymentVerificationLetterProof(proof, fakePublicInputs);
     }
 
     // function test_all() public {

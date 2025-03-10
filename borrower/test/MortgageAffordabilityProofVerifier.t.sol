@@ -44,7 +44,7 @@ contract MortgageAffordabilityProofVerifierTest is Test {
                   //.withProjectPath("./circuits/circuit-for-borrower"); /// @dev - Custom file path for the circuit file.
 
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 2);
-        mortgageAffordabilityProofVerifier.verifyEqual(proof, publicInputs);
+        mortgageAffordabilityProofVerifier.verifyMortgageAffordabilityProof(proof, publicInputs);
     }
 
     function test_wrongProof() public {
@@ -80,7 +80,7 @@ contract MortgageAffordabilityProofVerifierTest is Test {
         fakePublicInputs[1] = bytes32(uint256(0xddddd));  // @dev - This is wrong publicInput ("nulifieir")
 
         vm.expectRevert();
-        mortgageAffordabilityProofVerifier.verifyEqual(proof, fakePublicInputs);
+        mortgageAffordabilityProofVerifier.verifyMortgageAffordabilityProof(proof, fakePublicInputs);
     }
 
     // function test_all() public {

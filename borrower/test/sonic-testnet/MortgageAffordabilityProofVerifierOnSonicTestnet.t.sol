@@ -28,7 +28,7 @@ contract MortgageAffordabilityProofVerifierOnSonicTestnetTest is Test {
     function test_verifyProof() public {
         noirHelper.withInput("x", 1).withInput("y", 1).withInput("return", 1);
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 2);
-        mortgageAffordabilityProofVerifier.verifyEqual(proof, publicInputs);
+        mortgageAffordabilityProofVerifier.verifyMortgageAffordabilityProof(proof, publicInputs);
     }
 
     function test_wrongProof() public {
@@ -36,7 +36,7 @@ contract MortgageAffordabilityProofVerifierOnSonicTestnetTest is Test {
         noirHelper.withInput("x", 1).withInput("y", 5).withInput("return", 5);
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_wrongProof", 2);
         vm.expectRevert();
-        mortgageAffordabilityProofVerifier.verifyEqual(proof, publicInputs);
+        mortgageAffordabilityProofVerifier.verifyMortgageAffordabilityProof(proof, publicInputs);
     }
 
     // function test_all() public {

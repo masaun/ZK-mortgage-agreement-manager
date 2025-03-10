@@ -31,7 +31,7 @@ contract MortgageAgreementManager {
 
     function storeEmploymentVerificationLetterProof(bytes calldata proof, bytes32[] calldata publicInputs) private returns (bool) {
         /// @dev - Check whether or not a give proof is a valid proof.
-        bool proofResult = employmentVerificationLetterProofVerifier.verifyEqual(proof, publicInputs);
+        bool proofResult = employmentVerificationLetterProofVerifier.verifyEmploymentVerificationLetterProof(proof, publicInputs);
         require(proofResult, "Proof is not valid");
 
         /// @dev - Store the employment verification letter proof and publicInput /w nullifier.
@@ -48,7 +48,7 @@ contract MortgageAgreementManager {
 
     function storeFICOCreditScoreProof(bytes calldata proof, bytes32[] calldata publicInputs) private returns (bool) {    
         /// @dev - Check whether or not a give proof is a valid proof.
-        bool proofResult = ficoCreditScoreProofVerifier.verifyEqual(proof, publicInputs);
+        bool proofResult = ficoCreditScoreProofVerifier.verifyFICOCreditScoreProof(proof, publicInputs);
         require(proofResult, "Proof is not valid");
 
         /// @dev - Store the FICO credit score proof and publicInput /w nullifier.
@@ -81,7 +81,7 @@ contract MortgageAgreementManager {
         storeFICOCreditScoreProof(ficoCreditScoreProof, ficoCreditScorePublicInputs);
 
         /// @dev - Check whether or not a give proof is a valid proof.
-        bool proofResult = mortgageAffordabilityProofVerifier.verifyEqual(mortgageAffordabilityProof, mortgageAffordabilityPublicInputs);
+        bool proofResult = mortgageAffordabilityProofVerifier.verifyMortgageAffordabilityProof(mortgageAffordabilityProof, mortgageAffordabilityPublicInputs);
         require(proofResult, "Proof is not valid");
         
         /// @dev - Store the mortgage affordability proof and publicInput /w nullifier.
