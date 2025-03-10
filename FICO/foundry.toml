@@ -1,0 +1,22 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+fs_permissions = [{ access = "read-write", path = "./"},{ access = "read-write", path = "/tmp/"}]
+ffi = true
+
+[profile.remappings]
+# ds-test = "lib/forge-std/lib/ds-test/src/"
+forge-std = "lib/foundry-noir-helper/lib/forge-std/src/"
+# foundry-noir-helper = "lib/foundry-noir-helper/src/"
+
+[rpc_endpoints]
+#sepolia = "${SEPOLIA_RPC}"
+sonic_blaze_testnet = "${SONIC_BLAZE_TESTNET_RPC}"
+electroneum_testnet = "${ELECTRONEUM_TESTNET_RPC}"
+
+[etherscan]
+#sepolia = { key = "${SEPOLIA_PRIVATE_KEY}" }
+#sonic_blaze_testnet = { key = "${SONIC_BLAZE_TESTNET_PRIVATE_KEY}" }
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config

@@ -84,7 +84,7 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
         uint256 fake_annual_salary = 60000;
         bytes32[] memory fakePublicInputs = new bytes32[](3);
         fakePublicInputs[0] = publicInputs[0];
-        fakePublicInputs[1] = bytes32(uint256(fake_annual_salary));  // @dev - This is wrong publicInput ("_annual_salary") - when this proof was geneerated.
+        fakePublicInputs[1] = bytes32(uint256(fake_annual_salary));  // @dev - This is wrong publicInput ("fake_annual_salary") - when this proof was geneerated.
         fakePublicInputs[2] = publicInputs[2];
 
         vm.expectRevert();
