@@ -20,37 +20,65 @@ contract MortgageAgreementManager {
         mortgageAffordabilityProofVerifier = _mortgageAffordabilityProofVerifier;
     }
 
-    function storeEmploymentVerificationLetterProof(bytes calldata proof, bytes32[] calldata publicInputs) public returns (bool) {
+    function storeEmploymentVerificationLetterProof(bytes calldata proof, bytes32[] calldata publicInputs) private returns (bool) {
         /// @dev - Check whether or not a give proof is a valid proof.
         bool proofResult = employmentVerificationLetterProofVerifier.verifyEqual(proof, publicInputs);
         require(proofResult, "Proof is not valid");
 
-        /// @dev - [TODO]: Implement the logic to store the employment verification letter proof.
+        /// @dev - Store the employment verification letter proof and publicInput /w nullifier.
+        bytes32 _merkleRoot = publicInputs[0];
+        bytes32 _annualSalary = publicInputs[1];
+        bytes32 _nullifier = publicInputs[2];
         employmentVerificationLetterProofsAndPublicInputs[proof] = DataTypes.EmploymentVerificationLetterProofAndPublicInput({
-            proof: proof,
-            publicInput: publicInputs
+            merkleRoot: _merkleRoot,
+            annualSalary: _annualSalary,
+            nullifier: _nullifier,
+            isNullifier: true
         });
     }
 
-    function storeFICOCreditScoreProof(bytes calldata proof, bytes32[] calldata publicInputs) public returns (bool) {
+    function storeFICOCreditScoreProof(bytes calldata proof, bytes32[] calldata publicInputs) private returns (bool) {    
         /// @dev - Check whether or not a give proof is a valid proof.
         bool proofResult = ficoCreditScoreProofVerifier.verifyEqual(proof, publicInputs);
         require(proofResult, "Proof is not valid");
 
-        /// @dev - [TODO]: Implement the logic to store the FICO credit score proof.
+        /// @dev - Store the FICO credit score proof and publicInput /w nullifier.
+        bytes32 _merkleRoot = publicInputs[0];
+        bytes32 _creditScore = publicInputs[1];
+        bytes32 _nullifier = publicInputs[2];
         ficoCreditScoreProofsAndPublicInputs[proof] = DataTypes.FICOCreditScoreProofAndPublicInput({
-            proof: proof,
-            publicInput: publicInputs
+            merkleRoot: _merkleRoot,
+            creditScore: _creditScore,
+            nullifier: _nullifier,
+            isNullifier: true
         });
     }
 
-    function createNewMortgageAgreement(bytes calldata proof, bytes32[] calldata publicInputs) public returns (bool) {
-        /// @dev - [TODO]: Get the proof/publicInput data from the mapping storage of the employment verification letter and FICO credit score.
+    function createNewMortgageAgreement(
+        bytes calldata employmentVerificationLetterProof, 
+        bytes32[] calldata employmentVerificationLetterPublicInputs,
+        bytes calldata ficoCreditScoreProof, 
+        bytes32[] calldata ficoCreditScorePublicInputs,
+        bytes calldata mortgageAffordabilityProof, 
+        bytes32[] calldata mortgageAffordabilityPublicInputs
+    ) public returns (bool) {
+        /// @dev - Store the proof/publicInput data into the mapping storage of the employment verification letter and FICO credit score.
+        storeEmploymentVerificationLetterProof(employmentVerificationLetterProof, employmentVerificationLetterPublicInputs);
+        storeFICOCreditScoreProof(ficoCreditScoreProof, ficoCreditScorePublicInputs);
 
         /// @dev - Check whether or not a give proof is a valid proof.
-        bool proofResult = mortgageAffordabilityProofVerifier.verifyEqual(proof, publicInputs);
+        bool proofResult = mortgageAffordabilityProofVerifier.verifyEqual(mortgageAffordabilityProof, mortgageAffordabilityPublicInputs);
         require(proofResult, "Proof is not valid");
         
+        /// @dev - Store the mortgage affordability proof and publicInput /w nullifier.
+        bytes32 _merkleRoot = mortgageAffordabilityPublicInputs[0];
+        bytes32 _nullifier = mortgageAffordabilityPublicInputs[1];
+        mortgageAffordabilityProofsAndPublicInputs[mortgageAffordabilityProof] = DataTypes.MortgageAffordabilityProofAndPublicInput({
+            merkleRoot: _merkleRoot,
+            nullifier: _nullifier,
+            isNullifier: true
+        });
+
         /// @dev - [TODO]: Implement the logic to create a new mortgage agreement.
     }
 }
