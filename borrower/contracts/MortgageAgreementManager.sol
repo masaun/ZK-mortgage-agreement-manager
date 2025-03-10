@@ -4,8 +4,17 @@ import { EmploymentVerificationLetterProofVerifier } from "../../employer/contra
 import { FICOCreditScoreProofVerifier } from "../../FICO/contracts/FICOCreditScoreProofVerifier.sol";
 import { MortgageAffordabilityProofVerifier } from "./MortgageAffordabilityProofVerifier.sol";
 
+import { DataTypes } from "./libraries/DataTypes.sol";
+
+/**
+ * @title MortgageAgreementManager contract
+ */
 contract MortgageAgreementManager {
     MortgageAffordabilityProofVerifier public mortgageAffordabilityProofVerifier;
+
+    mapping(bytes => DataTypes.EmploymentVerificationLetterProofAndPublicInput) public employmentVerificationLetterProofsAndPublicInputs;
+    mapping(bytes => DataTypes.FICOCreditScoreProofAndPublicInput) public ficoCreditScoreProofsAndPublicInputs;
+    mapping(bytes => DataTypes.MortgageAffordabilityProofAndPublicInput) public mortgageAffordabilityProofsAndPublicInputs;
 
     constructor(MortgageAffordabilityProofVerifier _mortgageAffordabilityProofVerifier) {
         mortgageAffordabilityProofVerifier = _mortgageAffordabilityProofVerifier;
@@ -17,6 +26,10 @@ contract MortgageAgreementManager {
         require(proofResult, "Proof is not valid");
 
         /// @dev - [TODO]: Implement the logic to store the employment verification letter proof.
+        employmentVerificationLetterProofsAndPublicInputs[proof] = DataTypes.EmploymentVerificationLetterProofAndPublicInput({
+            proof: proof,
+            publicInput: publicInputs
+        });
     }
 
     function storeFICOCreditScoreProof(bytes calldata proof, bytes32[] calldata publicInputs) public returns (bool) {
@@ -25,6 +38,10 @@ contract MortgageAgreementManager {
         require(proofResult, "Proof is not valid");
 
         /// @dev - [TODO]: Implement the logic to store the FICO credit score proof.
+        ficoCreditScoreProofsAndPublicInputs[proof] = DataTypes.FICOCreditScoreProofAndPublicInput({
+            proof: proof,
+            publicInput: publicInputs
+        });
     }
 
     function createNewMortgageAgreement(bytes calldata proof, bytes32[] calldata publicInputs) public returns (bool) {
