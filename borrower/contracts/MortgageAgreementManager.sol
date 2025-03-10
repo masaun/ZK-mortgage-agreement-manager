@@ -1,8 +1,10 @@
 pragma solidity ^0.8.17;
 
-import { EmploymentVerificationLetterProofVerifier } from "../../employer/contracts/EmploymentVerificationLetterProofVerifier.sol";
-import { FICOCreditScoreProofVerifier } from "../../FICO/contracts/FICOCreditScoreProofVerifier.sol";
+import { IEmploymentVerificationLetterProofVerifier } from "./interfaces/employer/IEmploymentVerificationLetterProofVerifier.sol";
+import { IFICOCreditScoreProofVerifier } from "./interfaces/FICO/IFICOCreditScoreProofVerifier.sol";
+//import { FICOCreditScoreProofVerifier } from "./FICOCreditScoreProofVerifier.sol";
 import { MortgageAffordabilityProofVerifier } from "./MortgageAffordabilityProofVerifier.sol";
+//import { MortgageAffordabilityProofVerifier } from "./MortgageAffordabilityProofVerifier.sol";
 
 import { DataTypes } from "./libraries/DataTypes.sol";
 
@@ -10,8 +12,8 @@ import { DataTypes } from "./libraries/DataTypes.sol";
  * @title MortgageAgreementManager contract
  */
 contract MortgageAgreementManager {
-    EmploymentVerificationLetterProofVerifier public employmentVerificationLetterProofVerifier;
-    FICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
+    IEmploymentVerificationLetterProofVerifier public employmentVerificationLetterProofVerifier;
+    IFICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
     MortgageAffordabilityProofVerifier public mortgageAffordabilityProofVerifier;
 
     mapping(bytes => DataTypes.EmploymentVerificationLetterProofAndPublicInput) public employmentVerificationLetterProofsAndPublicInputs;
@@ -20,8 +22,8 @@ contract MortgageAgreementManager {
     mapping(address => mapping (address => DataTypes.MortgageAgreement)) public mortgageAgreements;
 
     constructor(
-        EmploymentVerificationLetterProofVerifier _employmentVerificationLetterProofVerifier,
-        FICOCreditScoreProofVerifier _ficoCreditScoreProofVerifier,
+        IEmploymentVerificationLetterProofVerifier _employmentVerificationLetterProofVerifier,
+        IFICOCreditScoreProofVerifier _ficoCreditScoreProofVerifier,
         MortgageAffordabilityProofVerifier _mortgageAffordabilityProofVerifier
     ) {
         employmentVerificationLetterProofVerifier = _employmentVerificationLetterProofVerifier;
