@@ -1,4 +1,4 @@
-# ZK Mortgage Loan Agreement Manager
+# ZK Mortgage Agreement Manager
 
 ## Tech Stack
 - `ZK circuit`: Written in [`Noir`](https://noir-lang.org/docs/) powered by [Aztec](https://aztec.network/)) 
@@ -7,8 +7,20 @@
 
 <br>
 
-
 ## Overview
+
+- This is the ZK Mortgage Agreement Manager, which is the Zero-Knowledge based mortgage loan agreement management system that consists of the ZK circuits and the smart contracts.
+
+- In the real estate space, when a borrower would borrow a mortgage loan to buy a house via a real estate agency, the following scenario will be proceeded:
+  - 1/ A borrower will submit some financial documents (i.e. `Employment verification letter`) to a real estate agency for showing their finantial profile (i.e `income`, `tax returns`, etc). 
+  - 2/ Also, the real estate company would ask a credit score provider (i.e. `FICO`) the borrower's `credit score` and retrieve it as the borrower's finantial profile.
+  - 3/ The real estate company would send these finantial profile (i.e. `income`, `credit score`) to a lender (i.e. Bank, Morgage Loan company, etc) as a morgage loan request.
+  - 4/ Once the borrower's morgage loan request would be approved by the lender, the mortgage agreement would be created through the real estate agency (or the lender).
+
+- The problem of the general mortgage loan process via a real estate agency above is that the real estate agency (and the lender) can see all of the borrower's informations, which includes the sensitive informations or/and unnecessity informations. 
+  - This project (`ZK Mortgage Agreement Manager`) can resolve these problem by the combination of the ZK circuits and the smart contracts as a privacy-preserving way.
+  - By using this project (`ZK Mortgage Agreement Manager`), a borrower can submit a mortgate loan request **without revealing their sensitive informations or/and unnecessity informations**.
+
 
 <br>
 
@@ -18,13 +30,10 @@
 | ------------- |:-------------:| -----:|
 | UltraVerifier (for the EmploymentVerificationLetterProof) | The UltraPlonk Verifer contract for the EmploymentVerificationLetterProof (`./employer/contracts/circuit/plonk_vk.sol`), which is generated based on ZK circuit in Noir (`./circuits/src/main.nr`). FYI: To generated this contract, the way of the [Noir's Solidity Verifier generation](https://noir-lang.org/docs/how_to/how-to-solidity-verifier) was used. | [0x621dbc8010E0d5Aa2b11a5103c9833eC94a70E39](https://testnet.sonicscan.org/address/0x621dbc8010e0d5aa2b11a5103c9833ec94a70e39) |
 | EmploymentVerificationLetterProofVerifier | The smart contract that enable to validate whether or not a EmploymentVerificationLetterProof-submitted is valid. | [0xEd1324385Fe64c83687C3f9576F3210c6B8E309E](https://testnet.sonicscan.org/address/0xed1324385fe64c83687c3f9576f3210c6b8e309e) |
-
 | UltraVerifier (for the FICOCreditScoreProof) | The UltraPlonk Verifer contract for the EmploymentVerificationLetterProof (`./FICO/contracts/circuit/plonk_vk.sol`), which is generated based on ZK circuit in Noir (`./circuits/src/main.nr`). FYI: To generated this contract, the way of the [Noir's Solidity Verifier generation](https://noir-lang.org/docs/how_to/how-to-solidity-verifier) was used. | [0xEa8EB5CFf49241B39950c31f788AEF8E0d4Df1c1](https://testnet.sonicscan.org/address/0xEa8EB5CFf49241B39950c31f788AEF8E0d4Df1c1) |
 | FICOCreditScoreProofVerifier | The smart contract that enable to validate whether or not a EmploymentVerificationLetterProof-submitted is valid. | [0x20a414abEcFe31DD27Aa7FcCC353a505E976D277](https://testnet.sonicscan.org/address/0x20a414abEcFe31DD27Aa7FcCC353a505E976D277) |
-
 | UltraVerifier (for the MortgageAffordabilityProof) | The UltraPlonk Verifer contract for the EmploymentVerificationLetterProof (`./borrower/contracts/circuit/plonk_vk.sol`), which is generated based on ZK circuit in Noir (`./circuits/src/main.nr`). FYI: To generated this contract, the way of the [Noir's Solidity Verifier generation](https://noir-lang.org/docs/how_to/how-to-solidity-verifier) was used. | [0x2317106a73E00fc66AB25aD50979CFf140075b2b](https://testnet.sonicscan.org/address/0x2317106a73E00fc66AB25aD50979CFf140075b2b) |
 | MortgageAffordabilityProofVerifier | The smart contract that enable to validate whether or not a MortgageAffordabilityProof-submitted is valid. | [0x7a2E68d1d1bB79dBc945801A02Bd6e17d0842457](https://testnet.sonicscan.org/address/0x7a2E68d1d1bB79dBc945801A02Bd6e17d0842457) |
-
 | MortgageAgreementManager | The smart contract that enable a borrower to create a request of the mortgage agreement /w three ZK proofs (`EmploymentVerificationLetterProof`, `FICOCreditScoreProof`, `MortgageAffordabilityProof`) and enable a lender to accept these request | [0x0A95E7Fc5c292eCe47893E63A1380f08a061814A](https://blockexplorer.thesecurityteam.rocks/address/0x0A95E7Fc5c292eCe47893E63A1380f08a061814A) |
 
 
