@@ -19,7 +19,7 @@
 
 - The problem of the general mortgage loan process via a real estate agency above is that the real estate agency (and the lender) can see all of the borrower's informations, which includes the sensitive informations or/and unnecessity informations. 
   - This project (`ZK Mortgage Agreement Manager`) can resolve these problem by the combination of the ZK circuits and the smart contracts as a privacy-preserving way.
-  - By using this project (`ZK Mortgage Agreement Manager`), a borrower can submit a mortgate loan request **without revealing their sensitive informations or/and unnecessity informations**.
+  - By using this project (`ZK Mortgage Agreement Manager`), a borrower can submit a mortgate loan request to a lender via a real estate agency **without revealing their sensitive informations or/and unnecessity informations**.
 
 
 <br>
@@ -103,7 +103,7 @@ sh ./buildContract.sh
 
 <br>
 
-## Smart Contract - Script on Sonic Testnet / Electroneum Testnet
+## Smart Contract - Script on Sonic Testnet
 
 - Run the script of the `Starter.s.sol`, which is the test file of the `Starter.sol` on Sonic Testnet.
 ```shell
@@ -182,21 +182,6 @@ Or, directly executing the following command:
 forge script script/DeploymentAllContracts.s.sol --broadcast --private-key <SONIC_BLAZE_TESTNET_PRIVATE_KEY> \
     ./circuits/target/contract.sol:UltraVerifier \
     ./Starter.sol:Starter --skip-simulation
-```
-
-<br>
-
-- 2/ Deploy all contracts on Electroneum Testnet by running the `script/DeploymentAllContracts.s.sol` 
-```bash
-sh ./script/electroneum-testnet/deployment/deployment-on-electroneum-testnet.sh
-``
-Or, directly executing the following command:
-```bash
-/// [NOTE]: Execute the following at the root directory.
-
-forge script script/electroneum-testnet/deployment/DeploymentAllContracts.s.sol --broadcast --private-key ${ELECTRONEUM_TESTNET_PRIVATE_KEY} \
-    ./circuits/target/contract.sol:UltraVerifier \
-    ./Starter.sol:Starter --skip-simulation --legacy
 ```
 
 
