@@ -1,10 +1,10 @@
 pragma solidity ^0.8.17;
 
-import { EmploymentVerificationLetterProofVerifier } from "../../../employer/contracts/EmploymentVerificationLetterProofVerifier.sol";
-import { FICOCreditScoreProofVerifier } from "../../../FICO/contracts/FICOCreditScoreProofVerifier.sol";
-import { MortgageAffordabilityProofVerifier } from "../../contracts/MortgageAffordabilityProofVerifier.sol";
+import { EmploymentVerificationLetterProofVerifier } from "../../employer/contracts/EmploymentVerificationLetterProofVerifier.sol";
+import { FICOCreditScoreProofVerifier } from "../../FICO/contracts/FICOCreditScoreProofVerifier.sol";
+import { MortgageAffordabilityProofVerifier } from "../contracts/MortgageAffordabilityProofVerifier.sol";
 
-import { DataTypes } from "../../contracts/libraries/DataTypes.sol";
+import { DataTypes } from "../contracts/libraries/DataTypes.sol";
 
 import { NoirHelper } from "foundry-noir-helper/NoirHelper.sol";
 import "forge-std/Test.sol";
