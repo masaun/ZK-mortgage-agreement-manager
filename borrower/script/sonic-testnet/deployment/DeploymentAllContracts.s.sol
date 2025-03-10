@@ -3,9 +3,9 @@ pragma solidity ^0.8.17;
 import "forge-std/Script.sol";
 
 /// @dev - ZK (Ultraplonk) circuit, which is generated in Noir.
-import { UltraVerifier } from "../../../../contracts/borrower/circuit/plonk_vk.sol"; /// @dev - Deployed-Verifier SC, which was generated based on the main.nr
-//import { UltraVerifier } from "../../../../circuits/circuit-for-borrower/target/contract.sol"; /// @dev - Deployed-Verifier SC, which was generated based on the main.nr
-import { MortgageAffordabilityProofVerifier } from "../../../../contracts/borrower/MortgageAffordabilityProofVerifier.sol";
+import { UltraVerifier } from "../../../contracts/circuit/plonk_vk.sol"; /// @dev - Deployed-Verifier SC, which was generated based on the main.nr
+//import { UltraVerifier } from "../../../circuits/circuit-for-borrower/target/contract.sol"; /// @dev - Deployed-Verifier SC, which was generated based on the main.nr
+import { MortgageAffordabilityProofVerifier } from "../../../contracts/MortgageAffordabilityProofVerifier.sol";
 
 //import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 

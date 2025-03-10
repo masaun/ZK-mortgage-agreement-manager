@@ -26,9 +26,9 @@ echo "Generate a Solidity Verifier contract"
 bb contract
 
 echo "Copy a Solidity Verifier contract-generated into the ./contracts/borrower/circuit directory"
-cp ./target/contract.sol ../../contracts/borrower/circuit
+cp ./target/contract.sol ../contracts/circuit
 
 echo "Rename the contract.sol with the plonk_vk.sol in the ./contracts/borrower/circuit directory"
-mv ../../contracts/borrower/circuit/contract.sol ../../contracts/borrower/circuit/plonk_vk.sol
+mv ../contracts/circuit/contract.sol ../contracts/circuit/plonk_vk.sol
 
 echo "Done"
