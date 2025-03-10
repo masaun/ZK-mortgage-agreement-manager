@@ -55,6 +55,10 @@ contract MortgageAgreementManager {
         });
     }
 
+    /**
+     * @notice - Create a request of mortgage agreement.
+     * @dev - This caller is only "Borrower" (Employee).
+     */
     function createRequestOfMortgageAgreement(
         address lender,
         bytes calldata employmentVerificationLetterProof, 
@@ -81,7 +85,7 @@ contract MortgageAgreementManager {
             isNullifier: true
         });
 
-        /// @dev - [TODO]: Implement the logic to create a new mortgage agreement.
+        /// @dev - Create a new mortgage agreement request.
         address _borrower = msg.sender;
         mortgageAgreements[msg.sender][lender] = DataTypes.MortgageAgreement({
             borrower: _borrower,
@@ -96,9 +100,14 @@ contract MortgageAgreementManager {
         });
     }
 
-    function acceptRequestOfMortgageAgreement() { /// [NOTE]: This caller is only lender (Real Estate company).
-        /// @dev - [TODO]: Implement the logic to accept a request of mortgage agreement.
+    /**
+     * @notice - Accept a request of mortgage agreement.
+     * @dev - This caller is only "Lender" (Real Estate company).
+     */
+    function acceptRequestOfMortgageAgreement(address borrower) public returns(bool) {
+        address lender = msg.sender;
+        require(lender == mortgageAgreements[borrower][lender].lender, "This lender is not matched with the lender in the mortgage agreement");
+        require(mortgageAgreements[borrower][lender].isAccepted == false, "This mortgage agreement is already accepted");
+        mortgageAgreements[borrower][lender].isAccepted = true;
     }
-    
-
 }
