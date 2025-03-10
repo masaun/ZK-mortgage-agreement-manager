@@ -19,14 +19,14 @@ contract MortgageAffordabilityProofVerifierScript is Script {
         //uint256 deployerPrivateKey = vm.envUint("LOCALHOST_PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
 
-        address ULTRA_VERIFIER = vm.envAddress("ULTRAVERIFER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
-        address STARTER = vm.envAddress("MORTGAGE_AFFORDABILITY_PROOF_VERIFIER_CONTRACT_ADDRESS_ON_SONIC_TESTNET");
+        address ULTRA_VERIFIER = vm.envAddress("ULTRAVERIFER_ON_SONIC_TESTNET");
+        address MORTGAGE_AFFORDABILITY_PROOF_VERIFIER = vm.envAddress("MORTGAGE_AFFORDABILITY_PROOF_VERIFIER_ON_SONIC_TESTNET");
         verifier = UltraVerifier(ULTRA_VERIFIER);
         //verifier = new UltraVerifier();
-        mortgageAffordabilityProofVerifier = MortgageAffordabilityProofVerifier(STARTER);
+        mortgageAffordabilityProofVerifier = MortgageAffordabilityProofVerifier(MORTGAGE_AFFORDABILITY_PROOF_VERIFIER);
         //mortgageAffordabilityProofVerifier = new MortgageAffordabilityProofVerifier(verifier);
 
-        bytes memory proof_w_inputs = vm.readFileBinary("./circuits/target/with_foundry_proof.bin");
+        bytes memory proof_w_inputs = vm.readFileBinary("./circuits/target/mortgage_affordability_proof.bin");
         bytes memory proofBytes = sliceAfter64Bytes(proof_w_inputs);
         //string memory proof = vm.readLine("./circuits/proofs/with_foundry.proof");
         //bytes memory proofBytes = vm.parseBytes(proof);
@@ -36,7 +36,7 @@ contract MortgageAffordabilityProofVerifierScript is Script {
         //correct[0] = bytes32(0x0000000000000000000000000000000000000000000000000000000000000001); // [Expect]: Reverted (= Invalid Proof)
         correct[1] = correct[0];
 
-        bool equal = mortgageAffordabilityProofVerifier.verifyEqual(proofBytes, correct);
+        bool equal = mortgageAffordabilityProofVerifier.verifyMortgageAffordabilityProof(proofBytes, correct);
         console2.logBool(equal); /// [Log]: true
         return equal;
     }

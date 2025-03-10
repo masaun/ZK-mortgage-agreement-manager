@@ -37,8 +37,10 @@ contract DeploymentAllContracts is Script {
         /// @dev - Logs of the deployed-contracts on Sonic Blaze Testnet
         console.logString("Logs of the deployed-contracts on Sonic Blaze Testnet");
         console.logString("\n");
-        //console.log("%s: %s", "RewardPoolFactory SC", address(rewardPoolFactory));
-        //console.logString("\n");
+        console.log("%s: %s", "UltraVerifier SC", address(verifier));
+        console.logString("\n");
+        console.log("%s: %s", "EmploymentVerificationLetterProofVerifier SC", address(employmentVerificationLetterProofVerifier));
+        console.logString("\n");
     }
 }
 

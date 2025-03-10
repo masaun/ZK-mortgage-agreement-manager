@@ -43,7 +43,7 @@ contract FICOCreditScoreProofVerifierTest is Test {
                   //.withProjectPath("./circuits/circuit-for-FICO"); /// @dev - Custom file path for the circuit file.
 
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 3);
-        ficoCreditScoreProofVerifier.verifyEqual(proof, publicInputs);
+        ficoCreditScoreProofVerifier.verifyFICOCreditScoreProof(proof, publicInputs);
     }
 
     function test_wrongProof() public {
@@ -80,7 +80,7 @@ contract FICOCreditScoreProofVerifierTest is Test {
         fakePublicInputs[2] = publicInputs[2];
 
         vm.expectRevert();
-        ficoCreditScoreProofVerifier.verifyEqual(proof, fakePublicInputs);
+        ficoCreditScoreProofVerifier.verifyFICOCreditScoreProof(proof, fakePublicInputs);
     }
 
     // function test_all() public {
