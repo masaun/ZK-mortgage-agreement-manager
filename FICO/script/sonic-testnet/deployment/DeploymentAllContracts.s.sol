@@ -50,4 +50,4 @@ contract DeploymentAllContracts is Script {
 
 // forge script script/DeploymentAllContracts.s.sol --broadcast --private-key <SONIC_BLAZE_TESTNET_PRIVATE_KEY> \
 //     ./circuits/target/contract.sol:UltraVerifier \
-//     ./Starter.sol:Starter --skip-simulation
+//     ./FICOCreditScoreProofVerifier.sol:FICOCreditScoreProofVerifier --skip-simulation
