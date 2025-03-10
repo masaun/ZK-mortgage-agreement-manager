@@ -35,11 +35,11 @@ library DataTypes {
         address borrower;
         address lender;
         bytes employmentVerificationLetterProof;
-        bytes32[] employmentVerificationLetterPublicInputs;
+        //bytes32[] employmentVerificationLetterPublicInputs;
         bytes ficoCreditScoreProof;
-        bytes32[] ficoCreditScorePublicInputs;
+        //bytes32[] ficoCreditScorePublicInputs;
         bytes mortgageAffordabilityProof;
-        bytes32[] mortgageAffordabilityPublicInputs;
+        //bytes32[] mortgageAffordabilityPublicInputs;
         bool isAccepted;
     }
 

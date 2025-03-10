@@ -4,6 +4,7 @@ out = "out"
 libs = ["lib"]
 fs_permissions = [{ access = "read-write", path = "./"},{ access = "read-write", path = "/tmp/"}]
 ffi = true
+#--via-ir = true
 
 [profile.remappings]
 # ds-test = "lib/forge-std/lib/ds-test/src/"
