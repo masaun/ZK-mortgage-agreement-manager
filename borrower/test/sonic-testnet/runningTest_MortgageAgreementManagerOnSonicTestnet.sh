@@ -1,0 +1,2 @@
+echo "Running the test of the MortgageAgreementManagerTest on Sonic Testnet..."
+forge test --optimize --optimizer-runs 5000 --evm-version cancun --match-contract MortgageAgreementManagerTest -vv --rpc-url ${SONIC_BLAZE_TESTNET_RPC}
