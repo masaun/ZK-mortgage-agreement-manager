@@ -1,8 +1,10 @@
 pragma solidity ^0.8.17;
 
-import { EmploymentVerificationLetterProofVerifier } from "../../../employer/contracts/EmploymentVerificationLetterProofVerifier.sol";
-import { FICOCreditScoreProofVerifier } from "../../../FICO/contracts/FICOCreditScoreProofVerifier.sol";
+import { IEmploymentVerificationLetterProofVerifier } from "../../../contracts/interfaces/employer/IEmploymentVerificationLetterProofVerifier.sol";
+import { IFICOCreditScoreProofVerifier } from "../../contracts/interfaces/FICO/IFICOCreditScoreProofVerifier.sol";
+//import { FICOCreditScoreProofVerifier } from "../../../FICO/contracts/FICOCreditScoreProofVerifier.sol";
 import { MortgageAffordabilityProofVerifier } from "../../contracts/MortgageAffordabilityProofVerifier.sol";
+//import { MortgageAffordabilityProofVerifier } from "../../contracts/MortgageAffordabilityProofVerifier.sol";
 
 import { DataTypes } from "../../contracts/libraries/DataTypes.sol";
 
@@ -14,8 +16,8 @@ import "forge-std/console.sol";
 contract MortgageAffordabilityProofVerifierTest is Test {
     NoirHelper public noirHelper;
 
-    EmploymentVerificationLetterProofVerifier public employmentVerificationLetterProofVerifier;
-    FICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
+    IEmploymentVerificationLetterProofVerifier public employmentVerificationLetterProofVerifier;
+    IFICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
     MortgageAffordabilityProofVerifier public mortgageAffordabilityProofVerifier;
 
     /// @dev - Read the each deployed address from the configuration file.
@@ -26,9 +28,9 @@ contract MortgageAffordabilityProofVerifierTest is Test {
     function setUp() public {
         noirHelper = new NoirHelper();
 
-        employmentVerificationLetterProofVerifier = new EmploymentVerificationLetterProofVerifier(EMPLOYMENT_VERIFICATION_LETTER_PROOF_VERIFIER);
-        ficoCreditScoreProofVerifier = new FICOCreditScoreProofVerifier(FICO_CREDIT_SCORE_PROOF_VERIFIER);
-        mortgageAffordabilityProofVerifier = new MortgageAffordabilityProofVerifier(MORTGAGE_AFFORDABILITY_PROOF_VERIFIER);
+        employmentVerificationLetterProofVerifier = IEmploymentVerificationLetterProofVerifier(EMPLOYMENT_VERIFICATION_LETTER_PROOF_VERIFIER);
+        ficoCreditScoreProofVerifier = IFICOCreditScoreProofVerifier(FICO_CREDIT_SCORE_PROOF_VERIFIER);
+        mortgageAffordabilityProofVerifier = MortgageAffordabilityProofVerifier(MORTGAGE_AFFORDABILITY_PROOF_VERIFIER);
     }
 
 }
