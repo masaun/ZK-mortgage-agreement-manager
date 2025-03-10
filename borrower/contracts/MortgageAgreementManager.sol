@@ -10,6 +10,8 @@ import { DataTypes } from "./libraries/DataTypes.sol";
  * @title MortgageAgreementManager contract
  */
 contract MortgageAgreementManager {
+    EmploymentVerificationLetterProofVerifier public employmentVerificationLetterProofVerifier;
+    FICOCreditScoreProofVerifier public ficoCreditScoreProofVerifier;
     MortgageAffordabilityProofVerifier public mortgageAffordabilityProofVerifier;
 
     mapping(bytes => DataTypes.EmploymentVerificationLetterProofAndPublicInput) public employmentVerificationLetterProofsAndPublicInputs;
@@ -17,7 +19,13 @@ contract MortgageAgreementManager {
     mapping(bytes => DataTypes.MortgageAffordabilityProofAndPublicInput) public mortgageAffordabilityProofsAndPublicInputs;
     mapping(address => mapping (address => DataTypes.MortgageAgreement)) public mortgageAgreements;
 
-    constructor(MortgageAffordabilityProofVerifier _mortgageAffordabilityProofVerifier) {
+    constructor(
+        EmploymentVerificationLetterProofVerifier _employmentVerificationLetterProofVerifier,
+        FICOCreditScoreProofVerifier _ficoCreditScoreProofVerifier,
+        MortgageAffordabilityProofVerifier _mortgageAffordabilityProofVerifier
+    ) {
+        employmentVerificationLetterProofVerifier = _employmentVerificationLetterProofVerifier;
+        ficoCreditScoreProofVerifier = _ficoCreditScoreProofVerifier;
         mortgageAffordabilityProofVerifier = _mortgageAffordabilityProofVerifier;
     }
 
