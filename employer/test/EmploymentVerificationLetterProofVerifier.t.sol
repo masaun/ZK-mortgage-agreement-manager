@@ -34,7 +34,7 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
                   .withInput("index", bytes32(uint256(0)))
                   .withInput("secret", bytes32(uint256(1))) /// @dev - [NOTE]: 'Field' type in Noir must be the form of this (= bytes32(uint256(XXX))).
                   .withInput("annual_salary", bytes32(uint256(55000)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  .withStruct("employeeVerificationLetterInfo") /// @dev - [NOTE]: The 'Struct' name (= EmployeeVerificationLetterInfo struct).
                   .withStructInput("employee_name", bytes32(uint256(1)))
                   .withStructInput("employee_address", bytes32(uint256(1)))
                   .withStructInput("employee_phone_number", bytes32(uint256(1)))
@@ -66,7 +66,7 @@ contract EmploymentVerificationLetterProofVerifierTest is Test {
                   .withInput("index", bytes32(uint256(0)))
                   .withInput("secret", bytes32(uint256(1))) /// @dev - [NOTE]: 'Field' type in Noir must be the form of this (= bytes32(uint256(XXX))).
                   .withInput("annual_salary", bytes32(uint256(55000)))
-                  .withStruct("employeeVerificationLetterInfo")
+                  .withStruct("employeeVerificationLetterInfo") /// @dev - [NOTE]: The 'Struct' name (= EmployeeVerificationLetterInfo struct).
                   .withStructInput("employee_name", bytes32(uint256(1)))
                   .withStructInput("employee_address", bytes32(uint256(1)))
                   .withStructInput("employee_phone_number", bytes32(uint256(1)))
