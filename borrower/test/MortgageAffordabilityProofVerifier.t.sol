@@ -34,18 +34,14 @@ contract MortgageAffordabilityProofVerifierTest is Test {
                   //.withInput("hash_path", hash_path)
                   .withInput("index", bytes32(uint256(0)))
                   .withInput("secret", bytes32(uint256(1))) /// @dev - [NOTE]: 'Field' type in Noir must be the form of this (= bytes32(uint256(XXX))).
-                  .withStruct("mortgageLoanAssessmentData")
+                  .withStruct("mortgageLoanAssessmentData") /// @dev - [NOTE]: The 'Struct' name (= MortgageLoanAssessmentData struct).
                   .withStructInput("fico_credit_score_proof", bytes32(uint256(0x2a653551d87767c545a2a11b29f0581a392b4e177a87c8e3eb425c51a26a8c77)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("fico_credit_score_proof_hash", bytes32(uint256(0x1efa9d6bb4dfdf86063cc77efdec90eb9262079230f1898049efad264835b6c8)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("employment_verification_letter_proof", bytes32(uint256(0x2a653551d87767c545a2a11b29f0581a392b4e177a87c8e3eb425c51a26a8c77)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("employment_verification_letter_proof_hash", bytes32(uint256(0x1efa9d6bb4dfdf86063cc77efdec90eb9262079230f1898049efad264835b6c8)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("credit_score", bytes32(uint256(800)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("income", bytes32(uint256(55000)));
+                  //.withProjectPath("./circuits/circuit-for-borrower"); /// @dev - Custom file path for the circuit file.
 
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_verifyProof", 2);
         mortgageAffordabilityProofVerifier.verifyEqual(proof, publicInputs);
@@ -67,18 +63,14 @@ contract MortgageAffordabilityProofVerifierTest is Test {
                   //.withInput("hash_path", hash_path)
                   .withInput("index", bytes32(uint256(0)))
                   .withInput("secret", bytes32(uint256(1))) /// @dev - [NOTE]: 'Field' type in Noir must be the form of this (= bytes32(uint256(XXX))).
-                  .withStruct("mortgageLoanAssessmentData")
+                  .withStruct("mortgageLoanAssessmentData") /// @dev - [NOTE]: The 'Struct' name (= MortgageLoanAssessmentData struct).
                   .withStructInput("fico_credit_score_proof", bytes32(uint256(0x2a653551d87767c545a2a11b29f0581a392b4e177a87c8e3eb425c51a26a8c77)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("fico_credit_score_proof_hash", bytes32(uint256(0x1efa9d6bb4dfdf86063cc77efdec90eb9262079230f1898049efad264835b6c8)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("employment_verification_letter_proof", bytes32(uint256(0x2a653551d87767c545a2a11b29f0581a392b4e177a87c8e3eb425c51a26a8c77)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("employment_verification_letter_proof_hash", bytes32(uint256(0x1efa9d6bb4dfdf86063cc77efdec90eb9262079230f1898049efad264835b6c8)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("credit_score", bytes32(uint256(800)))
-                  .withStruct("mortgageLoanAssessmentData")
                   .withStructInput("income", bytes32(uint256(55000)));
+                  //.withProjectPath("./circuits/circuit-for-FICO"); /// @dev - Custom file path for the circuit file.
 
         (bytes32[] memory publicInputs, bytes memory proof) = noirHelper.generateProof("test_wrongProof", 2);
 
