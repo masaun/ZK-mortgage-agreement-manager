@@ -15,6 +15,7 @@ contract MortgageAgreementManager {
     mapping(bytes => DataTypes.EmploymentVerificationLetterProofAndPublicInput) public employmentVerificationLetterProofsAndPublicInputs;
     mapping(bytes => DataTypes.FICOCreditScoreProofAndPublicInput) public ficoCreditScoreProofsAndPublicInputs;
     mapping(bytes => DataTypes.MortgageAffordabilityProofAndPublicInput) public mortgageAffordabilityProofsAndPublicInputs;
+    mapping(address => mapping (address => DataTypes.MortgageAgreement)) public mortgageAgreements;
 
     constructor(MortgageAffordabilityProofVerifier _mortgageAffordabilityProofVerifier) {
         mortgageAffordabilityProofVerifier = _mortgageAffordabilityProofVerifier;
@@ -54,7 +55,8 @@ contract MortgageAgreementManager {
         });
     }
 
-    function createNewMortgageAgreement(
+    function createRequestOfMortgageAgreement(
+        address lender,
         bytes calldata employmentVerificationLetterProof, 
         bytes32[] calldata employmentVerificationLetterPublicInputs,
         bytes calldata ficoCreditScoreProof, 
@@ -80,5 +82,23 @@ contract MortgageAgreementManager {
         });
 
         /// @dev - [TODO]: Implement the logic to create a new mortgage agreement.
+        address _borrower = msg.sender;
+        mortgageAgreements[msg.sender][lender] = DataTypes.MortgageAgreement({
+            borrower: _borrower,
+            lender: lender,
+            employmentVerificationLetterProof: employmentVerificationLetterProof,
+            employmentVerificationLetterPublicInputs: employmentVerificationLetterPublicInputs,
+            ficoCreditScoreProof: ficoCreditScoreProof,
+            ficoCreditScorePublicInputs: ficoCreditScorePublicInputs,
+            mortgageAffordabilityProof: mortgageAffordabilityProof,
+            mortgageAffordabilityPublicInputs: mortgageAffordabilityPublicInputs,
+            isAccepted: false
+        });
     }
+
+    function acceptRequestOfMortgageAgreement() { /// [NOTE]: This caller is only lender (Real Estate company).
+        /// @dev - [TODO]: Implement the logic to accept a request of mortgage agreement.
+    }
+    
+
 }

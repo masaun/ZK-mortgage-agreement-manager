@@ -31,6 +31,18 @@ library DataTypes {
         bool isNullifier;
     }
 
+    struct MortgageAgreement {
+        address borrower;
+        address lender;
+        bytes employmentVerificationLetterProof;
+        bytes32[] employmentVerificationLetterPublicInputs;
+        bytes ficoCreditScoreProof;
+        bytes32[] ficoCreditScorePublicInputs;
+        bytes mortgageAffordabilityProof;
+        bytes32[] mortgageAffordabilityPublicInputs;
+        bool isAccepted;
+    }
+
     // struct PublicInput { /// @dev - Only publicInput is stored into here.
     //     bytes32[] publicInput;
     // }
