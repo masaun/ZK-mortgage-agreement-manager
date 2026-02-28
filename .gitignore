@@ -28,3 +28,4 @@ circuits/circuit-for-FICO/test_verifyProof.toml
 
 node_modules
 package-lock.json
+bun.lockb
